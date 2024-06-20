@@ -6,6 +6,7 @@ import java.util.List;
 
 import models.Address;
 import models.Property;
+import models.Role;
 import models.User;
 
 public class jdbcDataAccess {
@@ -62,7 +63,7 @@ public class jdbcDataAccess {
                     result.getInt("user_id"),
                     result.getString("firstname"),
                     result.getString("lastname"),
-                    result.getString("role")
+                    Role.valueOf(result.getString("role"))
                 );
 
                 // Récupérer les données de la propriété
@@ -119,7 +120,7 @@ public class jdbcDataAccess {
                     result.getInt("user_id"),
                     result.getString("firstname"),
                     result.getString("lastname"),
-                    result.getString("role")
+                    Role.valueOf(result.getString("role"))
                 );
 
                 // Récupérer les données de la propriété

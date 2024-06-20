@@ -18,8 +18,9 @@ public class User extends Persist{
     @Column(name = "lastname")
     private String lastname;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private String role; // TODO: Add enum ?
+    private Role role; // TODO: Add enum ?
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Property> properties;
@@ -27,7 +28,7 @@ public class User extends Persist{
     public User() {
     }
 
-    public User(int id, String firstname, String lastname, String role) {
+    public User(int id, String firstname, String lastname, Role role) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;

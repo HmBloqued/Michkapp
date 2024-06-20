@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane id="body" prefHeight="834.0" prefWidth="1194.0" stylesheets="@styles.css"
+    xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.property_selection.Controller">
+    <HBox>
+        <children>
+            <VBox>
+                <children>
+                    <VBox>
+                        <children>
+                            <Label text="ADRESSE" styleClass="title-label" />
+                        </children>
+                        <children>
+                            <Label text="Code postal - Ville" styleClass="title-label" />
+                        </children>
+                    </VBox>
+                </children>
+            </VBox>
+        </children>
+    </HBox>
+</AnchorPane>
