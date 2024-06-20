@@ -45,12 +45,16 @@ public class Room extends Persist{
         this.property = property;
         this.roomType = roomType;
         this.name = name;
+
+        create(this);
     }
 
     public Room(Property property, RoomType roomType, String name) {
         this.property = property;
         this.roomType = roomType;
         this.name = name;
+
+        create(this);
     }
 
     public Integer getId() {

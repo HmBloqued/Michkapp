@@ -61,6 +61,20 @@ public class Inventory extends Persist{
         this.startDate = startDate;
         this.isOccupantPresent = isOccupantPresent;
         this.isOwnerPresent = isOwnerPresent;
+
+        create(this);
+    }
+
+    public Inventory(Property property, User agent, User occupant, Date startDate, Boolean isOccupantPresent,
+            Boolean isOwnerPresent) {
+        this.property = property;
+        this.agent = agent;
+        this.occupant = occupant;
+        this.startDate = startDate;
+        this.isOccupantPresent = isOccupantPresent;
+        this.isOwnerPresent = isOwnerPresent;
+
+        create(this);
     }
 
     public Integer getId() {

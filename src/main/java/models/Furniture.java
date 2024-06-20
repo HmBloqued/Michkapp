@@ -41,12 +41,16 @@ public class Furniture extends Persist {
         this.name = name;
         this.room = room;
         this.position = position;
+
+        create(this);
     }
 
     public Furniture(String name, Room room, String position) {
         this.name = name;
         this.room = room;
         this.position = position;
+
+        create(this);
     }
 
     public Long getId() {

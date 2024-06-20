@@ -37,6 +37,14 @@ public class User extends Persist{
         create(this);
     }
 
+    public User(String firstname, String lastname, Role role) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.role = role;
+
+        create(this);
+    }
+
     @Override
     public String toString() {
         return "User [firstname=" + firstname + ", id=" + id + ", lastname=" + lastname + ", properties=" + properties

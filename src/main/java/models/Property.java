@@ -43,6 +43,14 @@ public class Property extends Persist {
         create(this);
     }
 
+    public Property(Address address, User owner, Date lastInventoryDate) {
+        this.address = address;
+        this.owner = owner;
+        this.lastInventoryDate = lastInventoryDate;
+
+        create(this);
+    }
+
     @Override
     public String toString() {
         return "Property [address=" + address + ", id=" + id + ", lastInventoryDate=" + lastInventoryDate + ", owner="

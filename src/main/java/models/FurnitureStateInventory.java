@@ -65,6 +65,16 @@ public class FurnitureStateInventory extends Persist {
         create(this);
     }
 
+    public FurnitureStateInventory(Inventory inventory, Furniture furniture, Date datetime,
+            State furnitureState) {
+        this.inventory = inventory;
+        this.furniture = furniture;
+        this.datetime = datetime;
+        this.furnitureState = furnitureState;
+
+        create(this);
+    }
+
     public Inventory getInventory() {
         return inventory;
     }
