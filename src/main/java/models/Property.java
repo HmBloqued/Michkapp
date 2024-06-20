@@ -3,6 +3,7 @@ package models;
 import java.text.DateFormat;
 import java.util.Date;
 
+import datas.Persist;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,7 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Property {
+public class Property extends Persist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +36,8 @@ public class Property {
         this.address = address;
         this.owner = owner;
         this.lastInventoryDate = lastInventoryDate;
+
+        create(this);
     }
 
     @Override
@@ -56,6 +59,4 @@ public class Property {
         return lastInventoryDate;
     }
 
-    
-    
 }

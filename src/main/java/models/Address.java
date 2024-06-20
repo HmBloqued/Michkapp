@@ -2,6 +2,7 @@ package models;
 
 import java.util.List;
 
+import datas.Persist;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,7 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Address {
+public class Address extends Persist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,6 +38,8 @@ public class Address {
         this.city = city;
         this.floor = floor;
         this.apartmentNumber = apartmentNumber;
+
+        create(this);
     }
 
     @Override

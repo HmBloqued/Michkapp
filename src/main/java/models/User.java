@@ -32,6 +32,8 @@ public class User extends Persist{
         this.firstname = firstname;
         this.lastname = lastname;
         this.role = role;
+
+        create(this);
     }
 
     @Override
