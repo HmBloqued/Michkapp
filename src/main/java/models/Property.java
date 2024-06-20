@@ -1,8 +1,10 @@
 package models;
 
 import java.util.Date;
+import java.util.List;
 
 import datas.Persist;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,6 +33,9 @@ public class Property extends Persist {
 
     @Column(name = "last_inventory_date")
     private Date lastInventoryDate;
+
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
+    private List<Room> rooms;
 
     public Property() {
     }
@@ -54,7 +60,7 @@ public class Property extends Persist {
     @Override
     public String toString() {
         return "Property [address=" + address + ", id=" + id + ", lastInventoryDate=" + lastInventoryDate + ", owner="
-                + owner + "]";
+                + owner + ", rooms=" + rooms + "]";
     }
 
     public Address getAddress() {
@@ -68,6 +74,10 @@ public class Property extends Persist {
 
     public Date getLastInventoryDate() {
         return lastInventoryDate;
+    }
+
+    public List<Room> getRooms() {
+        return rooms;
     }
 
 }
