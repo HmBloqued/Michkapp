@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+
+
+<HBox spacing="5.0" styleClass="table-row" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="resources.components.PropertyController" stylesheets="@styles.css">
+    <children>
+        <HBox prefWidth="384.0">
+            <children>
+                <Label fx:id="addressLabel" text="Adresse indisponible"
+                    styleClass="table-element" />
+            </children>
+        </HBox>
+        <HBox prefWidth="200.0">
+            <children>
+                <Label fx:id="lastDateLabel" text="Pas encore" styleClass="table-element" />
+            </children>
+        </HBox>
+        <HBox prefWidth="200.0">
+            <!-- Generate a button -->
+            <children>
+                <Button prefHeight="26.0" fx:id="chooseProperty" text="Commencer un état des lieux" styleClass="table-button"/>
+            </children>
+        </HBox>
+    </children>
+</HBox>

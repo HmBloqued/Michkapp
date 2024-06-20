@@ -1,0 +1,17 @@
+@import url("../../resources/common.css");
+
+#column1 {
+    /* Align left */
+    -fx-font-size: 12px;
+    -fx-font-weight: 900;
+}
+
+#property-pane {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 30px;
+    -fx-spacing: 10;
+}
+
+#property-table {
+    -fx-padding: 20;
+}

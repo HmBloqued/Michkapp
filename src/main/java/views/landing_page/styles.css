@@ -1,0 +1,8 @@
+@import url("../../resources/common.css");
+
+#start-inventory {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 30px;
+    -fx-padding: 10;
+    -fx-spacing: 10;
+}

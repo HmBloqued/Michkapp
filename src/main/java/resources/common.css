@@ -1,0 +1,40 @@
+/* Define fx label */
+.label {
+    -fx-font-family: 'Arial';
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}
+
+.button {
+    -fx-font-family: 'Arial';
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-text-fill: white;
+    -fx-background-color: #007AFF;
+    -fx-background-radius: 10px;
+    -fx-alignment: center;
+}
+
+#body {
+    -fx-background-color: #EFEFEF ;
+}
+
+.title-label {
+    -fx-font-family: 'Arial';
+    -fx-font-size: 12px;
+    -fx-font-weight: 900;
+    -fx-text-fill: #8E8E93;
+}
+
+.table-element {
+    -fx-font-family: 'Arial';
+    -fx-font-size: 12px;
+    -fx-font-weight: normal;
+}
+
+.table-button {
+    -fx-font-family: 'Arial';
+    -fx-font-size: 12px;
+    -fx-font-weight: 600;
+}

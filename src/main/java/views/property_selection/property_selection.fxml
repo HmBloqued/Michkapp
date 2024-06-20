@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane id="body" prefHeight="834.0" prefWidth="1194.0" stylesheets="@styles.css"
+    xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.property_selection.Controller">
+
+    <AnchorPane layoutX="170.0" layoutY="100.0" prefWidth="854.0"
+        id="property-pane">
+        <children>
+            <VBox prefWidth="854.0" fx:id="propertyTable" id="property-table" spacing="10.0">
+                <children>
+                    <HBox spacing="5.0">
+                        <children>
+                            <HBox prefWidth="384.0">
+                                <children>
+                                    <Label text="ADRESSE" styleClass="title-label" />
+                                </children>
+                            </HBox>
+                            <HBox prefWidth="200.0">
+                                <children>
+                                    <Label text="DERNIER ÉTAT DES LIEUX" styleClass="title-label" />
+                                </children>
+                            </HBox>
+                        </children>
+                    </HBox>
+                </children >
+            </VBox>
+        </children>
+    </AnchorPane>
+</AnchorPane>
