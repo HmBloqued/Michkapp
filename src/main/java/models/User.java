@@ -21,7 +21,7 @@ public class User extends Persist{
     @Column(name = "role")
     private String role; // TODO: Add enum ?
 
-    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Property> properties;
 
     public User() {

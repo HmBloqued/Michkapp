@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.util.Date;
 
 import datas.Persist;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,6 +27,7 @@ public class Property extends Persist {
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private User owner;
 
+    @Column(name = "last_inventory_date")
     private Date lastInventoryDate;
 
     public Property() {

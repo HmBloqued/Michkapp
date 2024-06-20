@@ -4,6 +4,7 @@ import java.util.List;
 
 import datas.Persist;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,14 +17,19 @@ public class Address extends Persist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "street_name")
     private String streetName;
+    @Column(name = "zip_code")
     private String zipCode;
+    @Column(name = "street_number")
     private String streetNumber;
     private String city;
     private Integer floor;
+
+    @Column(name = "apartment_number")
     private Integer apartmentNumber;
 
-    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
     private List<Property> properties;
 
     public Address() {
