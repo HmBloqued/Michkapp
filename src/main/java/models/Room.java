@@ -1,5 +1,7 @@
 package models;
 
+import java.util.List;
+
 import datas.Persist;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 // CREATE TABLE `room` ( 
 //   `id` INT AUTO_INCREMENT NOT NULL,
@@ -36,6 +39,9 @@ public class Room extends Persist{
 
     @Column(name = "name")
     private String name;
+
+    @OneToMany(mappedBy = "room")
+    private List<Furniture> furnitures;
 
     public Room() {
     }

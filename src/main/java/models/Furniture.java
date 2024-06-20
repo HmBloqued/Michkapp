@@ -1,5 +1,7 @@
 package models;
 
+import java.util.List;
+
 import datas.Persist;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 // CREATE TABLE `furniture` (
 //   `id` BIGINT AUTO_INCREMENT NOT NULL,
@@ -27,11 +30,15 @@ public class Furniture extends Persist {
     private String name;
 
     // Enum
+    @Column(name = "position")
     private String position;
 
     @ManyToOne
     @JoinColumn(name = "room_id", referencedColumnName = "id")
     private Room room;
+
+    @OneToMany(mappedBy = "furniture")
+    private List<FurnitureStateInventory> furnitureStateInventories;
 
     public Furniture() {
     }
