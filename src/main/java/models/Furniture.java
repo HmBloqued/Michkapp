@@ -29,7 +29,6 @@ public class Furniture extends Persist {
     @Column(name = "name")
     private String name;
 
-    // Enum
     @Column(name = "position")
     private String position;
 
