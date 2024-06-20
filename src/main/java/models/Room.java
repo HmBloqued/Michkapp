@@ -3,6 +3,8 @@ package models;
 import datas.Persist;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,9 +30,9 @@ public class Room extends Persist{
     @JoinColumn(name = "property_id", referencedColumnName = "id")
     private Property property;
 
-    // TODO: enmum
+    @Enumerated(EnumType.STRING)
     @Column(name = "room_type")
-    private String roomType;
+    private RoomType roomType;
 
     @Column(name = "name")
     private String name;
@@ -38,14 +40,14 @@ public class Room extends Persist{
     public Room() {
     }
 
-    public Room(Integer id, Property property, String roomType, String name) {
+    public Room(Integer id, Property property, RoomType roomType, String name) {
         this.id = id;
         this.property = property;
         this.roomType = roomType;
         this.name = name;
     }
 
-    public Room(Property property, String roomType, String name) {
+    public Room(Property property, RoomType roomType, String name) {
         this.property = property;
         this.roomType = roomType;
         this.name = name;
@@ -67,11 +69,11 @@ public class Room extends Persist{
         this.property = property;
     }
 
-    public String getRoomType() {
+    public RoomType getRoomType() {
         return roomType;
     }
 
-    public void setRoomType(String roomType) {
+    public void setRoomType(RoomType roomType) {
         this.roomType = roomType;
     }
 

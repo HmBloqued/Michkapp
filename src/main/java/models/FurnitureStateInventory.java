@@ -1,16 +1,14 @@
 package models;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import datas.Persist;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
-import jakarta.persistence.ManyToOne;
 
 // CREATE TABLE `furniture_state_inventory` (
 //   `inventory_id` INT NOT NULL,
@@ -34,18 +32,18 @@ public class FurnitureStateInventory extends Persist {
     private Furniture furniture;
 
     @Column(name = "datetime", nullable = false)
-    private LocalDateTime datetime;
+    private Date datetime;
 
-    // TODO: Enum
+    @Enumerated(EnumType.STRING)
     @Column(name = "furniture_state", nullable = false)
-    private String furnitureState;
+    private State furnitureState;
 
     @Lob
     @Column(name = "picture")
     private byte[] picture;
 
     @Column(name = "picture_date")
-    private LocalDateTime pictureDate;
+    private Date pictureDate;
 
     @Column(name = "comment", length = 250)
     private String comment;
@@ -53,9 +51,9 @@ public class FurnitureStateInventory extends Persist {
     public FurnitureStateInventory() {
     }
 
-    public FurnitureStateInventory(Inventory inventory, Furniture furniture, LocalDateTime datetime,
-            String furnitureState,
-            byte[] picture, LocalDateTime pictureDate, String comment) {
+    public FurnitureStateInventory(Inventory inventory, Furniture furniture, Date datetime,
+            State furnitureState,
+            byte[] picture, Date pictureDate, String comment) {
         this.inventory = inventory;
         this.furniture = furniture;
         this.datetime = datetime;
@@ -75,11 +73,11 @@ public class FurnitureStateInventory extends Persist {
         return furniture;
     }
 
-    public LocalDateTime getDatetime() {
+    public Date getDatetime() {
         return datetime;
     }
 
-    public String getFurnitureState() {
+    public State getFurnitureState() {
         return furnitureState;
     }
 
@@ -87,7 +85,7 @@ public class FurnitureStateInventory extends Persist {
         return picture;
     }
 
-    public LocalDateTime getPictureDate() {
+    public Date getPictureDate() {
         return pictureDate;
     }
 

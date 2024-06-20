@@ -20,7 +20,7 @@ public class User extends Persist{
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private Role role; // TODO: Add enum ?
+    private Role role;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Property> properties;
