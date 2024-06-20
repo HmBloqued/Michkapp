@@ -33,13 +33,13 @@ public class Controller implements Initializable {
 
         for (Property property : properties) {
             System.out.println(property);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/components/property.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/components/property.fxml"));
             try {
                 Parent component = loader.load();
                 PropertyController controller = loader.getController();
                 controller.setData(property);
                 component.getStylesheets()
-                        .add(getClass().getResource("../../resources/components/styles.css").toExternalForm());
+                        .add(getClass().getResource("/resources/components/styles.css").toExternalForm());
                 propertyTable.getChildren().add(component);
             } catch (Exception e) {
                 e.printStackTrace();

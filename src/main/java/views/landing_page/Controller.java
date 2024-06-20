@@ -14,12 +14,15 @@ public class Controller {
     // TODO: Rename to something like "select property"
     private void startInventory(ActionEvent event) throws IOException {
         // Load
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../property_selection/property_selection.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/property_selection/property_selection.fxml"));
+        // FXMLLoader loader = new FXMLLoader(getClass().getResource("java/views/property_selection/property_selection.fxml"));
+
         Parent otherSceneRoot = loader.load();
 
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         Scene otherScene = new Scene(otherSceneRoot);
-        otherScene.getStylesheets().add(getClass().getResource("../property_selection/styles.css").toExternalForm());
+        otherScene.getStylesheets().add(getClass().getResource("/views/property_selection/styles.css").toExternalForm());
+        // otherScene.getStylesheets().add(getClass().getResource("java/views/property_selection/styles.css").toExternalForm());
         stage.setScene(otherScene);
         stage.setResizable(false);
         stage.show();
