@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 
 <AnchorPane id="body" prefHeight="834.0" prefWidth="1194.0" stylesheets="@styles.css"
-    xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.property_selection.Controller">
+    xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.room_inventory.Controller">
     <HBox>
         <children>
             <VBox>

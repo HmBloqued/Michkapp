@@ -4,16 +4,24 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import datas.jdbcDataAccess;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import models.Address;
+import models.Inventory;
 import models.Property;
 import models.User;
 
 public class Controller {
-    
+    private Property property;
+
     @FXML
     private Label address;
 
@@ -30,14 +38,20 @@ public class Controller {
     private Label todayDate;
 
     @FXML
-    public void clickOnSaveButton(ActionEvent event) throws IOException{
+    private CheckBox ownerPresent;
+
+    @FXML
+    private CheckBox occupantPresent;
+
+    @FXML
+    public void clickOnSaveButton(ActionEvent event) throws IOException {
         System.out.println("Save");
     }
 
     public void setData(Property property) {
+        this.property = property;
         Address address = property.getAddress();
         User owner = property.getOwner();
-
 
         this.address.setText(String.format("%s %s", address.getStreetNumber(), address.getStreetName()));
         this.addressSecondPart.setText(String.format("%s %s", address.getZipCode(), address.getCity()));
@@ -47,12 +61,34 @@ public class Controller {
     }
 
     @FXML
-    public void startInventory(ActionEvent event) throws IOException{
-        // Create inventory with appropriate values
-        
+    public void startInventory(ActionEvent event) throws IOException {
+        try {
+            // Create inventory with appropriate values
+            jdbcDataAccess dataAccess = new jdbcDataAccess();
+            int inventoryId = dataAccess.createInventory(this.property.getId(), this.ownerPresent.isSelected(),
+                    this.occupantPresent.isSelected());
 
-        // Create every inventory state for each furniture
+            // Create every inventory state for each furniture
+            boolean result = dataAccess.createFurnitureStatesInventory(property, inventoryId);
+            if (!result) {
+                System.out.println("Error while creating furniture states inventory");
+                return;
+            }
 
-        // Switch to inventory scene
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("../views/room_inventory/room_inventory.fxml"));
+            VBox root = loader.load();
+
+            views.room_inventory.Controller controller = loader.getController();
+            controller.setData(property, new Inventory());
+
+            Scene nextScene = new Scene(root);
+            Stage mainWindow = (Stage) ownerPresent.getScene().getWindow();
+
+            mainWindow.setScene(nextScene);
+            mainWindow.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -7,12 +7,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Button?>
 
 <AnchorPane id="body" prefHeight="834.0" prefWidth="1194.0" stylesheets="@styles.css"
     xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.prepare_inventory.Controller">
-    <AnchorPane layoutX="397.0" layoutY="297.0" prefHeight="239.0" prefWidth="400.0"
+    <AnchorPane layoutX="397.0" layoutY="297.0" prefHeight="200.0" prefWidth="400.0"
         id="prepare-inventory">
-        <HBox layoutX="20.0" layoutY="20.0" prefHeight="219.0" prefWidth="380.0">
+        <HBox layoutX="20.0" layoutY="20.0" prefWidth="380.0">
             <children>
                 <VBox spacing="30.0">
                     <children>
@@ -40,7 +41,7 @@
                             <children>
                                 <HBox spacing="5.0">
                                     <children>
-                                        <CheckBox fx:id="checkbox1" />
+                                        <CheckBox fx:id="ownerPresent" />
                                     </children>
                                     <children>
                                         <Label text="Présence du propriétaire"
@@ -49,7 +50,7 @@
                                 </HBox>
                                 <HBox spacing="5.0">
                                     <children>
-                                        <CheckBox fx:id="checkbox2" />
+                                        <CheckBox fx:id="occupantPresent" />
                                     </children>
                                     <children>
                                         <Label text="Présence du locataire"
@@ -57,12 +58,12 @@
                                     </children>
                                 </HBox>
                             </children>
-                            <children>
-                                <Button fx:id="startInventory" mnemonicParsing="false"
-                                    onAction="#startInventory" text="Commencer l'état des lieux"
-                                    minHeight="38" minWidth="219.0" />
-                            </children>
                         </VBox>
+                    </children>
+                    <children>
+                        <Button fx:id="startInventory" mnemonicParsing="false"
+                            onAction="#startInventory" text="Commencer l'état des lieux"
+                            minHeight="38" minWidth="380.0"/>
                     </children>
                 </VBox>
             </children>

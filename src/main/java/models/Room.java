@@ -3,6 +3,7 @@ package models;
 import java.util.List;
 
 import datas.Persist;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -40,7 +41,7 @@ public class Room extends Persist{
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "room")
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<Furniture> furnitures;
 
     public Room() {
@@ -93,5 +94,9 @@ public class Room extends Persist{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Furniture> getFurnitures() {
+        return furnitures;
     }
 }

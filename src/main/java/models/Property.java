@@ -7,6 +7,7 @@ import datas.Persist;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -37,7 +38,7 @@ public class Property extends Persist {
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
     private List<Room> rooms;
 
-    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Inventory> inventories;
 
     public Property() {
@@ -83,4 +84,7 @@ public class Property extends Persist {
         return rooms;
     }
 
+    public Integer getId() {
+        return id;
+    }   
 }

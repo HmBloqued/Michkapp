@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import datas.Persist;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Furniture extends Persist implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name")
@@ -37,7 +38,7 @@ public class Furniture extends Persist implements Serializable {
     @JoinColumn(name = "room_id", referencedColumnName = "id")
     private Room room;
 
-    @OneToMany(mappedBy = "furniture")
+    @OneToMany(mappedBy = "furniture", cascade = CascadeType.ALL)
     private List<FurnitureStateInventory> furnitureStateInventories;
 
     public Furniture() {
