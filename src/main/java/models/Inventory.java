@@ -1,5 +1,6 @@
 package models;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import datas.Persist;
@@ -10,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 // CREATE TABLE `inventory` (
 //   `id` INT AUTO_INCREMENT NOT NULL,
@@ -23,7 +25,8 @@ import jakarta.persistence.ManyToOne;
 // );
 
 @Entity
-public class Inventory extends Persist{
+@Table(name = "inventory")
+public class Inventory extends Persist implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -52,7 +55,8 @@ public class Inventory extends Persist{
     public Inventory() {
     }
 
-    public Inventory(Integer id, Property property, User agent, User occupant, Date startDate, Boolean isOccupantPresent,
+    public Inventory(Integer id, Property property, User agent, User occupant, Date startDate,
+            Boolean isOccupantPresent,
             Boolean isOwnerPresent) {
         this.id = id;
         this.property = property;

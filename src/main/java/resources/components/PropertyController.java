@@ -43,6 +43,10 @@ public class PropertyController {
                 // Charger la vue suivante depuis nextScene.fxml
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../../views/prepare_inventory/prepare_inventory.fxml"));
                 Parent root = loader.load();
+                
+                //  setData
+                views.prepare_inventory.Controller controller = loader.getController();
+                controller.setData(property);
 
                 // Créer une nouvelle scène avec la vue chargée
                 Scene nextScene = new Scene(root);

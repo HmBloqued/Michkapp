@@ -40,7 +40,10 @@ public class Controller implements Initializable {
                 controller.setData(property);
                 component.getStylesheets()
                         .add(getClass().getResource("/resources/components/styles.css").toExternalForm());
-                propertyTable.getChildren().add(component);
+                        
+                if (propertyTable != null) {
+                    propertyTable.getChildren().add(component);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

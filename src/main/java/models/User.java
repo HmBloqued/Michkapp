@@ -25,6 +25,12 @@ public class User extends Persist{
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Property> properties;
 
+    @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL)
+    private List<Inventory> inventoriesAsAgent;
+    
+    @OneToMany(mappedBy = "occupant", cascade = CascadeType.ALL)
+    private List<Inventory> inventoriesAsOccupant;
+
     public User() {
     }
 
@@ -49,5 +55,14 @@ public class User extends Persist{
     public String toString() {
         return "User [firstname=" + firstname + ", id=" + id + ", lastname=" + lastname + ", properties=" + properties
                 + ", role=" + role + "]";
+    }
+
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
     }
 }

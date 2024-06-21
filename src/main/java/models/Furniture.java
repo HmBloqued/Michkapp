@@ -1,5 +1,6 @@
 package models;
 
+import java.io.Serializable;
 import java.util.List;
 
 import datas.Persist;
@@ -21,7 +22,7 @@ import jakarta.persistence.OneToMany;
 // );
 
 @Entity
-public class Furniture extends Persist {
+public class Furniture extends Persist implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

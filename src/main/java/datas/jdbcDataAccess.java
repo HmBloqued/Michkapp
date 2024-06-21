@@ -139,6 +139,40 @@ public class jdbcDataAccess {
         return property;
     }
 
+    // Create inventory
+    public boolean createInventory(int propertyId) throws SQLException {
+        // TODO: TEMP default agent and occupant id
+        String query = "INSERT INTO Inventory (date, property_id, agent_id, occupant_id) VALUES (NOW(), " + propertyId +  ", 1, 1)";
+        Statement statement = null;
+        boolean result = false;
+
+        try {
+            connection = jdbcCreateConnection();
+            statement = connection.createStatement();
+            result = statement.execute(query);
+        } finally {
+            if (statement != null) statement.close();
+        }
+
+        return result;
+    }
+
+    // public boolean createFurnitureStatesInventory(int inventoryId, int propertyId) throws SQLException {
+    //     String query = "INSERT INTO FurnitureStatesInventory (inventory_id, furniture_id, state_id) VALUES (" + inventoryId + ", " + furnitureId + ", " + stateId + ")";
+    //     Statement statement = null;
+    //     boolean result = false;
+
+    //     try {
+    //         connection = jdbcCreateConnection();
+    //         statement = connection.createStatement();
+    //         result = statement.execute(query);
+    //     } finally {
+    //         if (statement != null) statement.close();
+    //     }
+
+    //     return result;
+    // }
+
     public void jdbcDataClose() throws SQLException {
         if (connection != null) {
             connection.close();

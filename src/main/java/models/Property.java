@@ -37,6 +37,9 @@ public class Property extends Persist {
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
     private List<Room> rooms;
 
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
+    private List<Inventory> inventories;
+
     public Property() {
     }
 
