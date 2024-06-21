@@ -1,1 +1,7 @@
-@import url("../common.css");
+@import url("../../resources/common.css");
+
+#menu-bar {
+    -fx-background-color: #FFFFFF;
+    -fx-spacing: 10;
+    -fx-padding: 20;
+}

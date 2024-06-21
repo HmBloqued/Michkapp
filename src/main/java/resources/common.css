@@ -16,6 +16,11 @@
     -fx-alignment: center;
 }
 
+.danger-button {
+    -fx-text-fill: #FA3156;
+    -fx-background-color: transparent;
+}
+
 #body {
     -fx-background-color: #EFEFEF ;
 }

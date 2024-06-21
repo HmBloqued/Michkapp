@@ -186,35 +186,43 @@ public class jdbcDataAccess {
     }
 
     public boolean createFurnitureStatesInventory(Property property, int inventoryId) throws SQLException {
-        System.out.println(property);
-        System.out.println(property.getRooms());
-
-        // Get all the rooms from the property
-        for (Room room : property.getRooms()) {
-            // Get all the furniture from the room
-
-            for (Furniture furniture : room.getFurnitures()) {
-                // SQL query to insert a new record
-                String query = "INSERT INTO FurnitureStateInventory (inventory_id, furniture_id, datetime, state) VALUES (?, ?, NOW(), ?)";
-
-                try (Connection connection = jdbcCreateConnection();
-                        PreparedStatement preparedStatement = connection.prepareStatement(query,
-                                Statement.RETURN_GENERATED_KEYS)) {
-
-                    // Set the parameters
-                    preparedStatement.setInt(1, inventoryId);
-                    preparedStatement.setLong(2, furniture.getId());
-                    preparedStatement.setString(3, State.NEW.toString());
-
+        String getRoomsQuery = "SELECT id FROM Room WHERE property_id = ?";
+        String getFurnituresQuery = "SELECT id FROM Furniture WHERE room_id = ?";
+        String insertFurnitureStateInventoryQuery = "INSERT INTO FurnitureStateInventory (inventory_id, furniture_id, datetime, furniture_state) VALUES (?, ?, NOW(), ?)";
+    
+        try (Connection connection = jdbcCreateConnection();
+             PreparedStatement getRoomsStatement = connection.prepareStatement(getRoomsQuery);
+             PreparedStatement getFurnituresStatement = connection.prepareStatement(getFurnituresQuery);
+             PreparedStatement insertFurnitureStateInventoryStatement = connection.prepareStatement(insertFurnitureStateInventoryQuery, Statement.RETURN_GENERATED_KEYS)) {
+    
+            // Get all the rooms from the property
+            getRoomsStatement.setInt(1, property.getId());
+            ResultSet roomsResultSet = getRoomsStatement.executeQuery();
+    
+            while (roomsResultSet.next()) {
+                int roomId = roomsResultSet.getInt("id");
+    
+                // Get all the furniture from the room
+                getFurnituresStatement.setInt(1, roomId);
+                ResultSet furnituresResultSet = getFurnituresStatement.executeQuery();
+    
+                while (furnituresResultSet.next()) {
+                    long furnitureId = furnituresResultSet.getLong("id");
+    
+                    // Set the parameters for inserting a new record
+                    insertFurnitureStateInventoryStatement.setInt(1, inventoryId);
+                    insertFurnitureStateInventoryStatement.setLong(2, furnitureId);
+                    insertFurnitureStateInventoryStatement.setString(3, State.NEW.toString());
+    
                     // Execute the insert statement
-                    preparedStatement.executeUpdate();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    return false;
+                    insertFurnitureStateInventoryStatement.executeUpdate();
                 }
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
-
+    
         return true;
     }
 

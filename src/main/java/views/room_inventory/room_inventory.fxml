@@ -6,23 +6,62 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Region?>
 
 <AnchorPane id="body" prefHeight="834.0" prefWidth="1194.0" stylesheets="@styles.css"
     xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.room_inventory.Controller">
     <HBox>
         <children>
-            <VBox>
+            <VBox prefHeight="834.0" prefWidth="300.0" id="menu-bar">
                 <children>
                     <VBox>
                         <children>
-                            <Label text="ADRESSE" styleClass="title-label" />
+                            <Label fx:id="labelAddress" text="ADRESSE" />
                         </children>
                         <children>
-                            <Label text="Code postal - Ville" styleClass="title-label" />
+                            <Label fx:id="labelAddressSecondPart" text="Code postal - Ville" />
+                        </children>
+                    </VBox>
+                </children>
+                <!-- Create space between top and bottom to place buttons at bottom -->
+                <children>
+                    <Region VBox.vgrow="ALWAYS" />
+                    <!-- TODO: Add "menu" for rooms -->
+                </children>
+                <children>
+                    <VBox>
+                        <children>
+                            <Button fx:id="startInventory" layoutX="85.0" layoutY="171.0"
+                                mnemonicParsing="false" onAction="#terminateInventory"
+                                text="Finaliser état des lieux" minHeight="38" minWidth="280" />
+                        </children>
+                        <children>
+                            <Button fx:id="startInventory" layoutX="85.0" layoutY="171.0"
+                                mnemonicParsing="false" styleClass="danger-button"
+                                text="Quitter et annuler l'état des lieux" minHeight="38"
+                                minWidth="280" />
                         </children>
                     </VBox>
                 </children>
             </VBox>
+        </children>
+        <children>
+            <AnchorPane layoutX="170.0" layoutY="100.0" prefWidth="854.0"
+            id="inventory-pane">
+                <VBox>
+                    <children>
+                        <VBox>
+                            <children>
+                                <Label text="ADRESSE" styleClass="title-label" />
+                            </children>
+                            <children>
+                                <Label text="Code postal - Ville" styleClass="title-label" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            </AnchorPane>
         </children>
     </HBox>
 </AnchorPane>

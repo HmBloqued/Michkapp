@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import models.Address;
@@ -76,8 +77,8 @@ public class Controller {
             }
 
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("../views/room_inventory/room_inventory.fxml"));
-            VBox root = loader.load();
+                    getClass().getResource("../room_inventory/room_inventory.fxml"));
+            AnchorPane root = loader.load();
 
             views.room_inventory.Controller controller = loader.getController();
             controller.setData(property, new Inventory());
