@@ -8,12 +8,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
 
 <AnchorPane id="body" prefHeight="834.0" prefWidth="1194.0" stylesheets="@styles.css"
     xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.room_inventory.Controller">
     <HBox>
         <children>
-            <VBox prefHeight="834.0" prefWidth="300.0" id="menu-bar">
+            <VBox prefHeight="834.0" maxWidth="280.0" prefWidth="280.0" id="menu-bar">
                 <children>
                     <VBox>
                         <children>
@@ -46,22 +48,54 @@
                 </children>
             </VBox>
         </children>
-        <children>
-            <AnchorPane layoutX="170.0" layoutY="100.0" prefWidth="854.0"
-            id="inventory-pane">
-                <VBox>
-                    <children>
-                        <VBox>
-                            <children>
-                                <Label text="ADRESSE" styleClass="title-label" />
-                            </children>
-                            <children>
-                                <Label text="Code postal - Ville" styleClass="title-label" />
-                            </children>
-                        </VBox>
-                    </children>
-                </VBox>
-            </AnchorPane>
-        </children>
     </HBox>
+    <children>
+        <AnchorPane layoutX="330.0" layoutY="78.0" prefWidth="854.0"
+            id="inventory-pane">
+            <VBox id="inventory-table" fx:id="inventoryTable">
+                <children>
+                    <HBox spacing="5.0" maxWidth="814.0">
+                        <children>
+                            <HBox prefWidth="150.0">
+                                <children>
+                                    <Label text="ÉLÉMENT" styleClass="title-label" />
+                                </children>
+                            </HBox>
+                        </children>
+                        <children>
+                            <HBox prefWidth="200.0">
+                                <children>
+                                    <Label text="POSITION" styleClass="title-label" />
+                                </children>
+                            </HBox>
+                        </children>
+                        <children>
+                            <HBox prefWidth="125.0">
+                                <children>
+                                    <Label text="ETAT" styleClass="title-label" />
+                                    <!-- Add a select -->
+                                </children>
+                            </HBox>
+                        </children>
+                        <children>
+                            <HBox prefWidth="200.0">
+                                <children>
+                                    <Label text="COMMENTAIRE" styleClass="title-label" />
+                                    <!-- Add a select -->
+                                </children>
+                            </HBox>
+                        </children>
+                        <children>
+                            <HBox prefWidth="150.0">
+                                <children>
+                                    <Label text="PHOTOGRAPHIE" styleClass="title-label" />
+                                    <!-- Add a select -->
+                                </children>
+                            </HBox>
+                        </children>
+                    </HBox>
+                </children>
+            </VBox>
+        </AnchorPane>
+    </children>
 </AnchorPane>

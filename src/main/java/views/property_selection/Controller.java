@@ -13,7 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
 import models.Property;
-import resources.components.PropertyController;
+import resources.components.property.PropertyController;
 
 public class Controller implements Initializable {
     @FXML
@@ -33,13 +33,13 @@ public class Controller implements Initializable {
 
         for (Property property : properties) {
             System.out.println(property);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/components/property.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/components/property/property.fxml"));
             try {
                 Parent component = loader.load();
                 PropertyController controller = loader.getController();
                 controller.setData(property);
                 component.getStylesheets()
-                        .add(getClass().getResource("/resources/components/styles.css").toExternalForm());
+                        .add(getClass().getResource("/resources/components/property/styles.css").toExternalForm());
                         
                 if (propertyTable != null) {
                     propertyTable.getChildren().add(component);

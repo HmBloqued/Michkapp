@@ -1,4 +1,4 @@
-package resources.components;
+package resources.components.property;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -37,7 +37,7 @@ public class PropertyController {
 
         chooseProperty.setOnAction(e -> { 
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../../views/prepare_inventory/prepare_inventory.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../views/prepare_inventory/prepare_inventory.fxml"));
                 Parent root = loader.load();
                 
                 views.prepare_inventory.Controller controller = loader.getController();

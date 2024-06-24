@@ -5,3 +5,13 @@
     -fx-spacing: 10;
     -fx-padding: 20;
 }
+
+#inventory-pane {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 30px;
+    -fx-spacing: 10;
+}
+
+#inventory-table {
+    -fx-padding: 20;
+}
