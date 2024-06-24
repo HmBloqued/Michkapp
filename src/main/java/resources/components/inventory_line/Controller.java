@@ -1,6 +1,7 @@
 package resources.components.inventory_line;
 
 import java.io.IOException;
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -13,6 +14,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import models.Address;
 import models.Property;
@@ -26,6 +29,12 @@ public class Controller {
 
     @FXML
     private TextField commentInput;
+
+    private Stage stage;
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 
     // TODO: Temp, should add parameter
     public void setData() {
@@ -54,5 +63,19 @@ public class Controller {
     private void handleCommentChange() {
         String comment = commentInput.getText();
         System.out.println("Comment: " + comment);
+    }
+
+    @FXML
+    private void choosePicture() throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Sélectionner une photgraphie de l'élément");
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("Image Files", "*.png"));
+        File selectedFile = fileChooser.showOpenDialog(stage);
+        if (selectedFile != null) {
+            System.out.println("Fichier sélectionné : " + selectedFile.getAbsolutePath());
+
+            // Handle this file to save it in database as a tinyblob
+            
+        }
     }
 }

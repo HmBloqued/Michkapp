@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
 
 <HBox spacing="5.0" styleClass="table-row" xmlns:fx="http://javafx.com/fxml/1" maxWidth="814.0"
     fx:controller="resources.components.inventory_line.Controller" stylesheets="@styles.css">
@@ -39,8 +40,7 @@
     <children>
         <HBox prefWidth="150.0">
             <children>
-                <Label text="PHOTOGRAPHIE" styleClass="table-element" />
-                <!-- Add a select -->
+                <Button text="Ajouter une image" onAction="#choosePicture"/>
             </children>
         </HBox>
     </children>

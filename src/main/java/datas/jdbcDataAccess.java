@@ -230,125 +230,7 @@ public class jdbcDataAccess {
         return true;
     }
 
-    // public List<FurnitureStateInventory> searchFurnitureStateInventory(int inventoryId, int roomId) {
-    //     List<FurnitureStateInventory> furnitureStateInventories = new ArrayList<>();
-    //     String query = "SELECT fsi.id as fsi_id, fsi.datetime as fsi_datetime, fsi.furniture_state as fsi_furniture_state, " +
-    //             "f.id as furniture_id, f.name as furniture_name, f.position as furniture_position, " +
-    //             "r.id as room_id, r.name as room_name, " +
-    //             "p.id as property_id, p.last_inventory_date as property_last_inventory_date, " +
-    //             "a.id as address_id, a.street_name, a.city, a.street_number, a.zip_code, a.floor, a.apartment_number, " +
-    //             "u.id as user_id, u.firstname, u.lastname, u.role " +
-    //             "i.id as inventory_id, i.start_date as inventory_start_date, i.is_owner_present, i.is_occupant_present, " +
-    //             "FROM FurnitureStateInventory fsi " +
-    //             "JOIN Furniture f ON fsi.furniture_id = f.id " +
-    //             "JOIN Room r ON f.room_id = r.id " +
-    //             "JOIN Property p ON r.property_id = p.id " +
-    //             "JOIN Address a ON p.address_id = a.id " +
-    //             "JOIN User u ON p.owner_id = u.id " +
-    //             "JOIN Inventory i ON fsi.inventory_id = i.id " +
-    //             "WHERE fsi.inventory_id = ? AND r.id = ?";
-
-    //     PreparedStatement preparedStatement = null;
-    //     ResultSet result = null;
-
-    //     try {
-    //         connection = jdbcCreateConnection();
-    //         preparedStatement = connection.prepareStatement(query);
-    //         preparedStatement.setInt(1, inventoryId);
-    //         preparedStatement.setInt(2, roomId);
-    //         result = preparedStatement.executeQuery();
-
-    //         while (result.next()) {
-    //             // Récupérer les données de l'adresse
-    //             Address address = new Address(
-    //                     result.getInt("address_id"),
-    //                     result.getString("street_name"),
-    //                     result.getString("zip_code"),
-    //                     result.getString("street_number"),
-    //                     result.getString("city"),
-    //                     result.getInt("floor"),
-    //                     result.getInt("apartment_number"));
-
-    //             // Récupérer les données de l'utilisateur (propriétaire)
-    //             User owner = new User(
-    //                     result.getInt("user_id"),
-    //                     result.getString("firstname"),
-    //                     result.getString("lastname"),
-    //                     Role.valueOf(result.getString("role")));
-
-    //             // Récupérer les données de l'agent
-    //             User agent = new User(
-    //                     result.getInt("user_id"),
-    //                     result.getString("firstname"),
-    //                     result.getString("lastname"),
-    //                     Role.valueOf(result.getString("role")));
-
-    //             // Récupérer les données de la propriété
-    //             Property property = new Property(
-    //                     result.getInt("property_id"),
-    //                     address,
-    //                     owner,
-    //                     result.getDate("property_last_inventory_date"));
-
-    //             // Récupérer les données de la pièce
-    //             Room room = new Room(
-    //                     result.getInt("room_id"),
-    //                     property,
-    //                     RoomType.valueOf(result.getString("room_type")),
-    //                     result.getString("room_name")
-    //                     );
-
-    //             // Récupérer les données du meuble
-    //             Furniture furniture = new Furniture(
-    //                     result.getLong("furniture_id"),
-    //                     result.getString("furniture_name"),
-    //                     room,
-    //                     result.getString("furniture_position"));
-
-    //             // Récupérer les données de l'inventaire
-    //             Inventory inventory = new Inventory(
-    //                     inventoryId,
-    //                     property,
-    //                     owner,
-    //                     result.getDate("inventory_start_date"),
-    //                     result.getBoolean("is_owner_present"),
-    //                     result.getBoolean("is_occupant_present"));
-
-    //             // Récupérer les données de l'inventaire du meuble
-    //             FurnitureStateInventory furnitureStateInventory = new FurnitureStateInventory(
-    //                     result.getInt("fsi_id"),
-    //                     furniture,
-    //                     result.getDate("fsi_datetime"),
-    //                     State.valueOf(result.getString("fsi_furniture_state")));
-    //         };
-    //     }
-    //     catch (SQLException e) {
-    //         e.printStackTrace();
-    //     }
-    //     finally {
-    //         if (result != null)
-    //             try {
-    //                 result.close();
-    //             } catch (SQLException e) {
-    //                 e.printStackTrace();
-    //             }
-    //         if (preparedStatement != null)
-    //             try {
-    //                 preparedStatement.close();
-    //             } catch (SQLException e) {
-    //                 e.printStackTrace();
-    //             }
-    //         if (connection != null)
-    //             try {
-    //                 connection.close();
-    //             } catch (SQLException e) {
-    //                 e.printStackTrace();
-    //             }
-    //     }
-    // }
-
     // Get furniture by id
-    
 
     // Get furniture state inventory by id
 
@@ -356,6 +238,11 @@ public class jdbcDataAccess {
 
     // Get user by id
 
+    // Patch furniture state inventory image (and image date)
+
+    // Patch furniture state inventory comment
+
+    // Patch furniture state inventory state
 
     public void jdbcDataClose() throws SQLException {
         if (connection != null) {
