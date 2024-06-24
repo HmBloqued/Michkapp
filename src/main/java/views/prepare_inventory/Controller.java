@@ -68,7 +68,6 @@ public class Controller {
             jdbcDataAccess dataAccess = new jdbcDataAccess();
             int inventoryId = dataAccess.createInventory(this.property.getId(), this.ownerPresent.isSelected(),
                     this.occupantPresent.isSelected());
-
             // Create every inventory state for each furniture
             boolean result = dataAccess.createFurnitureStatesInventory(property, inventoryId);
             if (!result) {
@@ -80,8 +79,11 @@ public class Controller {
                     getClass().getResource("../room_inventory/room_inventory.fxml"));
             AnchorPane root = loader.load();
 
+            // Get inventory from inventory id
+            Inventory inventory = dataAccess.getInventoryById(inventoryId, property);
+
             views.room_inventory.Controller controller = loader.getController();
-            controller.setData(property, new Inventory());
+            controller.setData(property, inventory);
 
             Scene nextScene = new Scene(root);
             Stage mainWindow = (Stage) ownerPresent.getScene().getWindow();

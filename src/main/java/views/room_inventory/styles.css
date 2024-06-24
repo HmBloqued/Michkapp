@@ -15,3 +15,20 @@
 #inventory-table {
     -fx-padding: 20;
 }
+
+
+/* Style select list-view element */
+.list-view .list-cell {
+    -fx-background-color: transparent;
+    -fx-background-radius: 10px;
+    -fx-padding: 12 10;
+    -fx-font-family: 'Arial';
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+    -fx-text-fill: black;
+}
+
+.list-view .list-cell:selected {
+    -fx-background-color: #007AFF;
+    -fx-text-fill: white;
+}

@@ -1,0 +1,6 @@
+@import url("../../resources/common.css");
+
+#terminate-inventory {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 30px;
+}

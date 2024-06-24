@@ -99,4 +99,12 @@ public class Room extends Persist{
     public List<Furniture> getFurnitures() {
         return furnitures;
     }
+
+    @Override
+    public String toString() {
+        return "Room [id=" + id + ", property=" + property + ", roomType=" + roomType + ", name=" + name
+                + ", furnitures=" + furnitures + "]";
+    }
+
+    
 }

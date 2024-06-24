@@ -6,6 +6,13 @@
     -fx-alignment: center;
 }
 
+.label-small {
+    -fx-font-family: 'Arial';
+    -fx-font-size: 14px;
+    -fx-font-weight: 400;
+    -fx-alignment: center;
+}
+
 .button {
     -fx-font-family: 'Arial';
     -fx-font-size: 14px;
@@ -22,7 +29,7 @@
 }
 
 #body {
-    -fx-background-color: #EFEFEF ;
+    -fx-background-color: #EFEFEF;
 }
 
 .title-label {
@@ -42,4 +49,10 @@
     -fx-font-family: 'Arial';
     -fx-font-size: 12px;
     -fx-font-weight: 600;
+}
+
+.list-view {
+    /* Remove every border */
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
 }

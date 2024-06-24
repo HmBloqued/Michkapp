@@ -10,14 +10,15 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ListView?>
 
 <AnchorPane id="body" prefHeight="834.0" prefWidth="1194.0" stylesheets="@styles.css"
     xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.room_inventory.Controller">
     <HBox>
         <children>
-            <VBox prefHeight="834.0" maxWidth="280.0" prefWidth="280.0" id="menu-bar">
+            <VBox prefHeight="834.0" maxWidth="280.0" prefWidth="280.0" id="menu-bar" spacing="30.0">
                 <children>
-                    <VBox>
+                    <VBox prefHeight="132.0">
                         <children>
                             <Label fx:id="labelAddress" text="ADRESSE" />
                         </children>
@@ -28,18 +29,24 @@
                 </children>
                 <!-- Create space between top and bottom to place buttons at bottom -->
                 <children>
-                    <Region VBox.vgrow="ALWAYS" />
-                    <!-- TODO: Add "menu" for rooms -->
+                    <VBox VBox.vgrow="ALWAYS" spacing="10.0">
+                        <children>
+                            <Label text="PIÈCES" styleClass="title-label"/>
+                        </children>
+                        <children>
+                            <ListView fx:id="listViewRoom" onMouseClicked="#selectRoom" VBox.vgrow="ALWAYS" />
+                        </children>
+                    </VBox>
                 </children>
                 <children>
                     <VBox>
                         <children>
-                            <Button fx:id="startInventory" layoutX="85.0" layoutY="171.0"
+                            <Button layoutX="85.0" layoutY="171.0"
                                 mnemonicParsing="false" onAction="#terminateInventory"
                                 text="Finaliser état des lieux" minHeight="38" minWidth="280" />
                         </children>
                         <children>
-                            <Button fx:id="startInventory" layoutX="85.0" layoutY="171.0"
+                            <Button layoutX="85.0" layoutY="171.0" onAction="#cancelInventory"
                                 mnemonicParsing="false" styleClass="danger-button"
                                 text="Quitter et annuler l'état des lieux" minHeight="38"
                                 minWidth="280" />
@@ -49,10 +56,15 @@
             </VBox>
         </children>
     </HBox>
+
+    <!-- Main part -->
     <children>
-        <AnchorPane layoutX="330.0" layoutY="78.0" prefWidth="854.0"
+        <Label text="PIECE" fx:id="roomNameLabel" layoutX="340.0" layoutY="20.0"/>
+    </children>
+    <children>
+        <AnchorPane layoutX="340.0" layoutY="78.0" prefWidth="834.0"
             id="inventory-pane">
-            <VBox id="inventory-table" fx:id="inventoryTable">
+            <VBox id="inventory-table" spacing="10.0">
                 <children>
                     <HBox spacing="5.0" maxWidth="814.0">
                         <children>
@@ -63,7 +75,7 @@
                             </HBox>
                         </children>
                         <children>
-                            <HBox prefWidth="200.0">
+                            <HBox prefWidth="100.0">
                                 <children>
                                     <Label text="POSITION" styleClass="title-label" />
                                 </children>
@@ -73,28 +85,27 @@
                             <HBox prefWidth="125.0">
                                 <children>
                                     <Label text="ETAT" styleClass="title-label" />
-                                    <!-- Add a select -->
                                 </children>
                             </HBox>
                         </children>
                         <children>
-                            <HBox prefWidth="200.0">
+                            <HBox prefWidth="220.0">
                                 <children>
                                     <Label text="COMMENTAIRE" styleClass="title-label" />
-                                    <!-- Add a select -->
                                 </children>
                             </HBox>
                         </children>
                         <children>
-                            <HBox prefWidth="150.0">
+                            <HBox prefWidth="180.0">
                                 <children>
                                     <Label text="PHOTOGRAPHIE" styleClass="title-label" />
-                                    <!-- Add a select -->
                                 </children>
                             </HBox>
                         </children>
                     </HBox>
                 </children>
+                <VBox fx:id="inventoryTable">
+                </VBox>
             </VBox>
         </AnchorPane>
     </children>

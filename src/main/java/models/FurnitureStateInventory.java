@@ -48,7 +48,7 @@ public class FurnitureStateInventory extends Persist {
     private State furnitureState;
 
     @Lob
-    @Column(name = "picture")
+    @Column(name = "picture", columnDefinition = "LONGBLOB")
     private byte[] picture;
 
     @Column(name = "picture_date")
