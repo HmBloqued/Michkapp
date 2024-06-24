@@ -4,11 +4,15 @@ import java.util.Date;
 
 import datas.Persist;
 import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
 
 // CREATE TABLE `furniture_state_inventory` (
 //   `inventory_id` INT NOT NULL,
@@ -23,12 +27,17 @@ import jakarta.persistence.Lob;
 
 @Entity
 public class FurnitureStateInventory extends Persist {
-    @Id
-    @Column(name = "inventory_id", nullable = false)
+    @EmbeddedId
+    private FurnitureStateInventoryId id;
+
+    @ManyToOne
+    @MapsId("inventoryId")
+    @JoinColumn(name = "inventory_id", nullable = false, referencedColumnName = "id")
     private Inventory inventory;
 
-    @Id
-    @Column(name = "furniture_id", nullable = false)
+    @ManyToOne
+    @MapsId("furnitureId")
+    @JoinColumn(name = "furniture_id", nullable = false, referencedColumnName = "id")
     private Furniture furniture;
 
     @Column(name = "datetime", nullable = false)

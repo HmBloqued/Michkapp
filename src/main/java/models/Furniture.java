@@ -26,7 +26,7 @@ import jakarta.persistence.OneToMany;
 public class Furniture extends Persist implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "name")
     private String name;
@@ -44,7 +44,7 @@ public class Furniture extends Persist implements Serializable {
     public Furniture() {
     }
 
-    public Furniture(Long id, String name, Room room, String position) {
+    public Furniture(Integer id, String name, Room room, String position) {
         this.id = id;
         this.name = name;
         this.room = room;
@@ -61,11 +61,11 @@ public class Furniture extends Persist implements Serializable {
         create(this);
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
