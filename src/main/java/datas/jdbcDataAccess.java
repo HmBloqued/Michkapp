@@ -232,8 +232,8 @@ public class jdbcDataAccess {
         return true;
     }
 
-    public Inventory getInventoryById(int inventoryId, Property property){
-        
+    public Inventory getInventoryById(int inventoryId, Property property) {
+
         Inventory inventory = null;
         String query = "SELECT i.id as inventory_id, i.start_date as inventory_start_date, i.agent_id as inventory_agent_id, i.occupant_id as inventory_occupant_id, i.is_owner_present as inventory_is_owner_present, i.is_occupant_present as inventory_is_occupant_present "
                 + "FROM Inventory i "
@@ -265,12 +265,6 @@ public class jdbcDataAccess {
         return inventory;
     }
 
-    // Get furniture by id
-    // public Furniture getFurnitureById()
-
-    // Get furniture state inventory by id
-
-    // Get room by id
     public List<Room> getRoomsByProperty(Property property) {
         List<Room> rooms = new ArrayList<>();
         String query = "SELECT r.id as room_id, r.name as room_name, r.room_type as room_type " +
@@ -366,9 +360,8 @@ public class jdbcDataAccess {
         return furnitureStateInventory;
     }
 
-    // Patch furniture state inventory image (and image date)
     public void patchFurnitureStateInventoryImage(FurnitureStateInventory furnitureStateInventory, byte[] image) {
-        String query = "UPDATE FurnitureStateInventory SET picture = ?, picture_date = NOW() WHERE furniture_id = ? AND inventory_id = ?";
+        String query = "UPDATE FurnitureStateInventory SET picture = ?, picture_date = NOW(), datetime = NOW() WHERE furniture_id = ? AND inventory_id = ?";
 
         PreparedStatement preparedStatement = null;
 
@@ -393,9 +386,8 @@ public class jdbcDataAccess {
         }
     }
 
-    // Patch furniture state inventory comment
     public void patchFurnitureStateInventoryComment(FurnitureStateInventory furnitureStateInventory, String comment) {
-        String query = "UPDATE FurnitureStateInventory SET comment = ? WHERE furniture_id = ? AND inventory_id = ?";
+        String query = "UPDATE FurnitureStateInventory SET comment = ?, datetime = NOW() WHERE furniture_id = ? AND inventory_id = ?";
 
         PreparedStatement preparedStatement = null;
 
@@ -422,7 +414,7 @@ public class jdbcDataAccess {
 
     // Patch furniture state inventory state
     public void patchFurnitureStateInventoryState(FurnitureStateInventory furnitureStateInventory, State state) {
-        String query = "UPDATE FurnitureStateInventory SET furniture_state = ? WHERE furniture_id = ? AND inventory_id = ?";
+        String query = "UPDATE FurnitureStateInventory SET furniture_state = ?, datetime = NOW() WHERE furniture_id = ? AND inventory_id = ?";
 
         PreparedStatement preparedStatement = null;
 
@@ -441,6 +433,64 @@ public class jdbcDataAccess {
             // Check if the update was successful
             if (affectedRows <= 0) {
                 System.out.println("Error updating the state");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public FurnitureStateInventory getFurnitureStateInventoryFromInventoryFurniture(Inventory inventory,
+            Furniture furniture) {
+        FurnitureStateInventory furnitureStateInventory = null;
+        String query = "SELECT fsi.datetime as fsi_datetime, fsi.furniture_state as fsi_furniture_state, fsi.picture as fsi_picture, fsi.picture_date as fsi_picture_date, fsi.comment as fsi_comment "
+                +
+                "FROM FurnitureStateInventory fsi " +
+                "WHERE fsi.furniture_id = " + furniture.getId() + " AND fsi.inventory_id = " + inventory.getId();
+
+        Statement statement = null;
+        ResultSet result = null;
+
+        try {
+            connection = jdbcCreateConnection();
+            statement = connection.createStatement();
+            result = statement.executeQuery(query);
+
+            if (result.next()) {
+                furnitureStateInventory = new FurnitureStateInventory(
+                        inventory,
+                        furniture,
+                        result.getDate("fsi_datetime"),
+                        State.valueOf(result.getString("fsi_furniture_state")),
+                        result.getBytes("fsi_picture"),
+                        result.getDate("fsi_picture_date"),
+                        result.getString("fsi_comment")
+                        );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return furnitureStateInventory;
+    }
+
+    public void patchPropertyLastInventoryDate(Property property){
+        String query = "UPDATE Property SET last_inventory_date = NOW() WHERE id = ?";
+
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = jdbcCreateConnection();
+            preparedStatement = connection.prepareStatement(query);
+
+            // Set the parameters
+            preparedStatement.setInt(1, property.getId());
+
+            // Execute the query
+            int affectedRows = preparedStatement.executeUpdate();
+
+            // Check if the update was successful
+            if (affectedRows <= 0) {
+                System.out.println("Error updating the date");
             }
         } catch (SQLException e) {
             e.printStackTrace();

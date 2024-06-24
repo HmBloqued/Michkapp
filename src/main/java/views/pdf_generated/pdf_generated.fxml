@@ -10,8 +10,8 @@
 
 
 <AnchorPane id="body" prefHeight="834.0" prefWidth="1194.0" stylesheets="@styles.css"
-    xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.terminate_inventory.Controller">
-    <AnchorPane layoutX="297.0" layoutY="273.0" prefHeight="287.0" prefWidth="600.0"
+    xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.pdf_generated.Controller">
+    <AnchorPane layoutX="297.0" layoutY="273.0" prefHeight="224.0" prefWidth="600.0"
         id="terminate-inventory">
         <children>
             <ImageView
@@ -24,7 +24,7 @@
             >
                 <image>
                     <Image
-                        url="@../../resources/icons/terminate.png"
+                        url="@../../resources/icons/pdf-done.png"
                         backgroundLoading="true"
                     />
                 </image>
@@ -33,34 +33,28 @@
         <children>
             <VBox layoutX="94" layoutY="85">
                 <children>
-                    <Label text="Finaliser l'état des lieux" prefWidth="411"
+                    <Label text="État des lieux terminé !" prefWidth="411"
                         textAlignment="CENTER"
                         alignment="CENTER" />
                 </children>
                 <children>
                     <Label
-                        text="Vous êtes sur le point de terminer définitivement l’état des lieux.&#10;Cette action est irréversible."
+                        text="Le lisible de l’état des lieux a été ajouté aux téléchargements."
                         textAlignment="CENTER" alignment="CENTER" styleClass="label-small" prefWidth="411"/>
                 </children>
             </VBox>
         </children>
         <children>
-            <VBox layoutX="150" layoutY="186" prefWidth="300" spacing="5">
+            <VBox layoutX="150" layoutY="166" prefWidth="300" spacing="5">
                 <children>
                     <!-- Button take max vbox width -->
-                    <Button layoutX="85.0" layoutY="171.0"
+                    <Button
                         mnemonicParsing="false"
-                        onAction="#terminateInventory" text="Cloturer l’état des lieux"
+                        onAction="#goBackToMainMenu" text="Revenir au menu"
                         minHeight="38"
                         prefWidth="300"
-                        fx:id="terminateButton"
+                        fx:id="menuButton"
                         />
-                </children>
-                <children>
-                    <Button layoutX="85.0" layoutY="171.0"
-                        mnemonicParsing="false" styleClass="danger-button"
-                        onAction="#goBackToInventory" text="Annuler" minHeight="38"
-                        prefWidth="300"/>
                 </children>
             </VBox>
         </children>

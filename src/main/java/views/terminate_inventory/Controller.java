@@ -1,34 +1,43 @@
 package views.terminate_inventory;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import datas.jdbcDataAccess;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
-import models.Address;
-import models.Furniture;
-import models.FurnitureStateInventory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import models.Inventory;
 import models.Property;
-import models.Room;
+
+import services.PdfWriterService;
 
 public class Controller {
     @FXML
-    private Label labelAddress;
+    private Button terminateButton;
+
+    private Property property;
+
+    private Inventory inventory;
 
     @FXML
     public void setData(Property property, Inventory inventory) {
+        this.property = property;
+        this.inventory = inventory;
         // Prepare this view
         System.out.println("Set data for terminate inventory");
     }
@@ -40,6 +49,38 @@ public class Controller {
 
     @FXML
     public void terminateInventory(ActionEvent event) {
-        System.out.println("Terminate inventory");
+        boolean isPdfGenerated = PdfWriterService.createInventoryPdf(inventory, property);
+        if (isPdfGenerated) {
+            // JDBC call to update inventory date
+            jdbcDataAccess dataAccess = new jdbcDataAccess();
+            dataAccess.patchPropertyLastInventoryDate(property);
+
+            try {
+                dataAccess.jdbcDataClose();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            // Send to pdf_generated view
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("../pdf_generated/pdf_generated.fxml"));
+
+            try {
+                AnchorPane root;
+                root = loader.load();
+
+                views.pdf_generated.Controller controller = loader.getController();
+                controller.setData();
+
+                Scene nextScene = new Scene(root);
+                Stage mainWindow = (Stage) terminateButton.getScene().getWindow();
+
+                mainWindow.setScene(nextScene);
+                mainWindow.show();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
     }
 }

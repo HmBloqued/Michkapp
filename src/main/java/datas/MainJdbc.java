@@ -18,6 +18,8 @@ public class MainJdbc {
         //     System.out.println(property);
         // }
 
+        // TODO: Define some properties and room etc...
+
         // // Close connection
         // dataAccess.jdbcDataClose();
         Address address = new Address(1, "rue de la paix", "75000", "1", "Paris", 1, 1);

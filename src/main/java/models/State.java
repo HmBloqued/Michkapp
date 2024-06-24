@@ -4,5 +4,5 @@ public enum State {
     NEW,
     GOOD,
     BAD,
-    MISSING
+    MISSING,
 }
