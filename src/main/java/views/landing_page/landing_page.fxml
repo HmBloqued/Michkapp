@@ -34,8 +34,8 @@
             <Label text="Commencer un état des lieux" layoutX="70" layoutY="95.0" />
         </children>
         <children>
-            <Button fx:id="startInventory" layoutX="85.0" layoutY="171.0" mnemonicParsing="false"
-                onAction="#startInventory" text="Commencer un état des lieux" minHeight="38" minWidth="230"/>
+            <Button layoutX="85.0" layoutY="171.0" mnemonicParsing="false"
+                onAction="#selectProperty" text="Commencer un état des lieux" minHeight="38" minWidth="230"/>
         </children>
     </AnchorPane>
     <!-- </AnchorPane> -->

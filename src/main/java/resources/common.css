@@ -28,6 +28,11 @@
     -fx-background-color: transparent;
 }
 
+.secondary-button {
+    -fx-text-fill: #007AFF;
+    -fx-background-color: transparent;
+}
+
 #body {
     -fx-background-color: #EFEFEF;
 }
@@ -43,6 +48,7 @@
     -fx-font-family: 'Arial';
     -fx-font-size: 12px;
     -fx-font-weight: normal;
+    -fx-padding: 7px 0;
 }
 
 .table-button {
@@ -51,8 +57,18 @@
     -fx-font-weight: 600;
 }
 
-.list-view {
-    /* Remove every border */
+.combo-box {
+    -fx-font-family: 'Arial';
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+    -fx-border-color: transparent transparent #C6C6C8 transparent;
+    -fx-background-color: #EFEFEF;
+}
+
+.text-field {
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
     -fx-background-color: transparent;
-    -fx-border-color: transparent;
+    -fx-border-color: transparent transparent #C6C6C8 transparent;
+    -fx-padding: 5px;
 }

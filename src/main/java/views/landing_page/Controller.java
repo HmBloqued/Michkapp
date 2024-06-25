@@ -11,8 +11,7 @@ import javafx.stage.Stage;
 
 public class Controller {
     @FXML
-    // TODO: Rename to something like "select property"
-    private void startInventory(ActionEvent event) throws IOException {
+    private void selectProperty(ActionEvent event) throws IOException {
         // Load
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/property_selection/property_selection.fxml"));
         Parent otherSceneRoot = loader.load();

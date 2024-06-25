@@ -11,62 +11,65 @@
 
 <AnchorPane id="body" prefHeight="834.0" prefWidth="1194.0" stylesheets="@styles.css"
     xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.prepare_inventory.Controller">
-    <AnchorPane layoutX="397.0" layoutY="297.0" prefHeight="200.0" prefWidth="400.0"
+    <AnchorPane layoutX="397.0" layoutY="250.0" prefHeight="310.0" prefWidth="400.0"
         id="prepare-inventory">
-        <HBox layoutX="20.0" layoutY="20.0" prefWidth="380.0">
-            <children>
-                <VBox spacing="30.0">
-                    <children>
-                        <VBox>
-                            <children>
-                                <Label fx:id="address" text="Numéro Rue" />
-                                <Label fx:id="addressSecondPart" text="Code postal - Ville" />
-                            </children>
-                        </VBox>
-                    </children>
-                    <children>
-                        <VBox spacing="5.0">
-                            <HBox>
-                                <Label text="ÉTAT DES LIEUX DU " styleClass="title-label" />
-                                <Label fx:id="todayDate" text="{todayDate}" styleClass="title-label" />
+        <children>
+            <VBox spacing="20.0" layoutX="20" layoutY="20" prefWidth="360" prefHeight="180">
+                <children>
+                    <VBox>
+                        <children>
+                            <Label fx:id="address" text="Numéro Rue" />
+                            <Label fx:id="addressSecondPart" text="Code postal - Ville" />
+                        </children>
+                    </VBox>
+                </children>
+                <children>
+                    <VBox spacing="2.0">
+                        <HBox>
+                            <Label text="ÉTAT DES LIEUX DU " styleClass="title-label" />
+                            <Label fx:id="todayDate" text="{todayDate}" styleClass="title-label" />
+                        </HBox>
+                        <HBox>
+                            <Label styleClass="table-element" text="Propriétaire : " />
+                            <Label fx:id="ownerName" styleClass="table-element" />
+                        </HBox>
+                    </VBox>
+                </children>
+                <children>
+                    <VBox spacing="5.0">
+                        <children>
+                            <HBox spacing="5.0">
+                                <children>
+                                    <CheckBox fx:id="ownerPresent" />
+                                </children>
+                                <children>
+                                    <Label text="Présence du propriétaire"
+                                        styleClass="checkbox-label" />
+                                </children>
                             </HBox>
-                            <HBox>
-                                <Label styleClass="table-element" text="Propriétaire : " />
-                                <Label fx:id="ownerName" styleClass="table-element" />
+                            <HBox spacing="5.0">
+                                <children>
+                                    <CheckBox fx:id="occupantPresent" />
+                                </children>
+                                <children>
+                                    <Label text="Présence du locataire"
+                                        styleClass="checkbox-label" />
+                                </children>
                             </HBox>
-                        </VBox>
-                    </children>
-                    <children>
-                        <VBox spacing="5.0">
-                            <children>
-                                <HBox spacing="5.0">
-                                    <children>
-                                        <CheckBox fx:id="ownerPresent" />
-                                    </children>
-                                    <children>
-                                        <Label text="Présence du propriétaire"
-                                            styleClass="table-element" />
-                                    </children>
-                                </HBox>
-                                <HBox spacing="5.0">
-                                    <children>
-                                        <CheckBox fx:id="occupantPresent" />
-                                    </children>
-                                    <children>
-                                        <Label text="Présence du locataire"
-                                            styleClass="table-element" />
-                                    </children>
-                                </HBox>
-                            </children>
-                        </VBox>
-                    </children>
-                    <children>
+                        </children>
+                    </VBox>
+                </children>
+                <children>
+                    <VBox spacing="5.0">
                         <Button fx:id="startInventory" mnemonicParsing="false"
                             onAction="#startInventory" text="Commencer l'état des lieux"
-                            minHeight="38" minWidth="380.0"/>
-                    </children>
-                </VBox>
-            </children>
-        </HBox>
+                            minHeight="38" minWidth="360.0" />
+                        <Button fx:id="startInventory" mnemonicParsing="false"
+                            onAction="#goBackToMenu" text="Revenir au menu"
+                            minHeight="38" minWidth="360.0" styleClass="secondary-button"/>
+                    </VBox>
+                </children>
+            </VBox>
+        </children>
     </AnchorPane>
 </AnchorPane>

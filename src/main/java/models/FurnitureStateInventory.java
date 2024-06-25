@@ -8,22 +8,11 @@ import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
-
-// CREATE TABLE `furniture_state_inventory` (
-//   `inventory_id` INT NOT NULL,
-//   `furniture_id` BIGINT NOT NULL,
-//   `datetime` DATETIME NOT NULL,
-//   `furniture_state` ENUM NOT NULL,
-//   `picture` BLOB NULL,
-//   `picture_date` DATETIME NULL,
-//   `comment` VARCHAR(250) NULL,
-//   CONSTRAINT `PRIMARY` PRIMARY KEY (`inventory_id`, `furniture_id`)
-// );
+import jakarta.persistence.Transient;
 
 @Entity
 public class FurnitureStateInventory extends Persist {
@@ -57,12 +46,15 @@ public class FurnitureStateInventory extends Persist {
     @Column(name = "comment", length = 250)
     private String comment;
 
+    @Column(name = "picture_name")
+    private String pictureName;
+
     public FurnitureStateInventory() {
     }
 
     public FurnitureStateInventory(Inventory inventory, Furniture furniture, Date datetime,
             State furnitureState,
-            byte[] picture, Date pictureDate, String comment) {
+            byte[] picture, Date pictureDate, String comment, String pictureName) {
         this.inventory = inventory;
         this.furniture = furniture;
         this.datetime = datetime;
@@ -70,6 +62,7 @@ public class FurnitureStateInventory extends Persist {
         this.picture = picture;
         this.pictureDate = pictureDate;
         this.comment = comment;
+        this.pictureName = pictureName;
 
         create(this);
     }
@@ -82,6 +75,10 @@ public class FurnitureStateInventory extends Persist {
         this.furnitureState = furnitureState;
 
         create(this);
+    }
+
+    public FurnitureStateInventoryId getId() {
+        return id;
     }
 
     public Inventory getInventory() {
@@ -104,6 +101,10 @@ public class FurnitureStateInventory extends Persist {
         return picture;
     }
 
+    public String getPictureName() {
+        return pictureName;
+    }
+
     public Date getPictureDate() {
         return pictureDate;
     }
@@ -112,10 +113,23 @@ public class FurnitureStateInventory extends Persist {
         return comment;
     }
 
+    public void setPicture(byte[] picture, String pictureName) {
+        this.picture = picture;
+        this.pictureName = pictureName;
+    }
+
     @Override
     public String toString() {
-        return "FurnitureStateInventory [comment=" + comment + ", datetime=" + datetime + ", furniture=" + furniture
-                + ", furnitureState=" + furnitureState + ", inventory=" + inventory + ", picture=" + picture
-                + ", pictureDate=" + pictureDate + "]";
+        return "FurnitureStateInventory{" +
+                "id=" + id +
+                ", inventory=" + inventory +
+                ", furniture=" + furniture +
+                ", datetime=" + datetime +
+                ", furnitureState=" + furnitureState +
+                ", picture=" + picture +
+                ", pictureDate=" + pictureDate +
+                ", comment='" + comment + '\'' +
+                ", pictureName='" + pictureName + '\'' +
+                '}';
     }
 }

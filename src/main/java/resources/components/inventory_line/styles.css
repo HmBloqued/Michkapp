@@ -5,10 +5,65 @@
     -fx-border-color: transparent transparent #EFEFEF transparent; /* top right bottom left */
     -fx-border-width: 0 0 1px 0; /* top right bottom left */
     -fx-border-style: solid;
+    padding: 5px 0 5px 0;
+    border-color: transparent transparent #EFEFEF transparent;
+    border-width: 0 0 1px 0;
+    border-style: solid;
 }
 
 .table-button {
     -fx-font-family: 'Arial';
     -fx-font-size: 12px;
     -fx-font-weight: 600;
+    font-family: 'Arial';
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.list-view {
+    /* Remove every border */
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0 0 10px 10px;
+    background-color: white;
+    border-color: transparent;
+}
+
+/* Style select list-view element */
+.list-view .list-cell {
+    -fx-padding: 8;
+    -fx-font-family: 'Arial';
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+    -fx-text-fill: black;
+    font-size: 14px;
+    padding: 8px;
+    font-family: 'Arial';
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.list-view .list-cell:selected {
+    -fx-background-color: #007AFF;
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+    background-color: #007AFF;
+}
+
+#picture-name{
+    -fx-font-family: 'Arial';
+    -fx-font-size: 10px;
+    -fx-font-weight: 400;
+    -fx-text-fill: #8E8E93;
+    -fx-padding: 10 0;
+    -fx-alignment: TOP_LEFT;
+    font-family: 'Arial';
+    font-size: 10px;
+    font-weight: 400;
+    padding: 10px 0;
+}
+
+#change-picture {
+    -fx-padding: 5;
+    padding: 5px;
 }

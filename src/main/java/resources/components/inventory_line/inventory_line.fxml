@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 
-<HBox spacing="5.0" styleClass="table-row" xmlns:fx="http://javafx.com/fxml/1" maxWidth="814.0"
+<HBox spacing="10.0" styleClass="table-row" xmlns:fx="http://javafx.com/fxml/1" maxWidth="814.0"
     fx:controller="resources.components.inventory_line.Controller" stylesheets="@styles.css">
     <children>
         <HBox prefWidth="150.0">
@@ -24,24 +24,32 @@
         </HBox>
     </children>
     <children>
-        <HBox prefWidth="125.0">
+        <HBox prefWidth="105.0">
             <children>
-                <ComboBox fx:id="stateCombo" prefWidth="125.0">
+                <ComboBox fx:id="stateCombo" prefWidth="105.0">
                 </ComboBox>
             </children>
         </HBox>
     </children>
     <children>
-        <HBox prefWidth="220.0">
+        <HBox prefWidth="240.0">
             <children>
-                <TextField fx:id="commentInput" prefWidth="200.0" />
+                <TextField fx:id="commentInput" prefWidth="240.0" />
             </children>
         </HBox>
     </children>
     <children>
-        <HBox prefWidth="180.0">
+        <HBox prefWidth="160.0">
             <children>
-                <Button text="Ajouter une image" onAction="#choosePicture">
+                <HBox fx:id="choosedPicture" minWidth="160.0" spacing="5" alignment="CENTER_LEFT">
+                    <Label fx:id="pictureName" id="picture-name" HBox.hgrow="ALWAYS" prefWidth="130"/>
+                    <Button onAction="#choosePicture" maxWidth="25" minWidth="25" minHeight="25" id="change-picture">
+                        <graphic>
+                            <ImageView fx:id="changePictureIcon" fitWidth="15" fitHeight="15" />
+                        </graphic>
+                    </Button>
+                </HBox>
+                <Button text="Ajouter une image" onAction="#choosePicture" fx:id="unchoosedPicture" minWidth="160">
                     <graphic>
                         <ImageView fx:id="addPictureIcon" fitWidth="15" fitHeight="15" />
                     </graphic>

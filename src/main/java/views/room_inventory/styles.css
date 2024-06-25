@@ -16,6 +16,11 @@
     -fx-padding: 20;
 }
 
+.list-view {
+    /* Remove every border */
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
 
 /* Style select list-view element */
 .list-view .list-cell {
@@ -34,5 +39,5 @@
 }
 
 #room-label {
-    -fx-padding: 10 0 0 0;
+    -fx-padding: 0 0 0 10;
 }

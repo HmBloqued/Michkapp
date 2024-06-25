@@ -61,6 +61,13 @@ public class Property extends Persist {
         create(this);
     }
 
+    public Property(Address address, User owner) {
+        this.address = address;
+        this.owner = owner;
+
+        create(this);
+    }
+
     @Override
     public String toString() {
         return "Property [address=" + address + ", id=" + id + ", lastInventoryDate=" + lastInventoryDate + ", owner="
@@ -71,7 +78,6 @@ public class Property extends Persist {
         return address;
     }
 
-    // TODO: Delete ?
     public User getOwner() {
         return owner;
     }

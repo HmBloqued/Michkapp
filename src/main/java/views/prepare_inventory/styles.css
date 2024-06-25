@@ -3,6 +3,25 @@
 #prepare-inventory {
     -fx-background-color: #FFFFFF;
     -fx-background-radius: 30px;
-    -fx-padding: 20;
-    -fx-spacing: 20;
+}
+
+.checkbox-label{
+    -fx-font-family: 'Arial';
+    -fx-font-size: 12px;
+    -fx-font-weight: 400;
+    -fx-padding: 3px;
+}
+
+.check-box .box {
+    -fx-background-color: #EFEFEF;
+    -fx-border-color: transparent;
+}
+
+/* Customize the mark inside the CheckBox */
+.check-box:selected .box {
+    -fx-background-color: #007AFF;  /* Background color when selected */
+}
+
+.check-box:selected .mark{
+    -fx-background-color: transparent;
 }

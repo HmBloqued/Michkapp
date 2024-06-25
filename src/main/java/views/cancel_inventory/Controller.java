@@ -1,4 +1,4 @@
-package views.terminate_inventory;
+package views.cancel_inventory;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -55,37 +55,30 @@ public class Controller {
 
     @FXML
     public void terminateInventory(ActionEvent event) {
-        boolean isPdfGenerated = PdfWriterService.createInventoryPdf(inventory, property);
-        if (isPdfGenerated) {
-            // JDBC call to update inventory date
-            jdbcDataAccess dataAccess = new jdbcDataAccess();
-            dataAccess.patchPropertyLastInventoryDate(property);
+        // JDBC call to delete inventory
+        jdbcDataAccess dataAccess = new jdbcDataAccess();
+        dataAccess.deleteInventory(inventory);
 
-            try {
-                dataAccess.jdbcDataClose();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        try {
+            dataAccess.jdbcDataClose();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-            // Send to pdf_generated view
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("../pdf_generated/pdf_generated.fxml"));
+        // Send to landing_page
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("../landing_page/landing_page.fxml"));
 
-            try {
-                AnchorPane root;
-                root = loader.load();
+        try {
+            AnchorPane root;
+            root = loader.load();
+            Scene nextScene = new Scene(root);
+            Stage mainWindow = (Stage) terminateButton.getScene().getWindow();
 
-                views.pdf_generated.Controller controller = loader.getController();
-                controller.setData();
-
-                Scene nextScene = new Scene(root);
-                Stage mainWindow = (Stage) terminateButton.getScene().getWindow();
-
-                mainWindow.setScene(nextScene);
-                mainWindow.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            mainWindow.setScene(nextScene);
+            mainWindow.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

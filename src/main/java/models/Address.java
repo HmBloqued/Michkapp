@@ -62,6 +62,15 @@ public class Address extends Persist {
         create(this);
     }
 
+    public Address(String streetName, String zipCode, String streetNumber, String city) {
+        this.streetName = streetName;
+        this.zipCode = zipCode;
+        this.streetNumber = streetNumber;
+        this.city = city;
+
+        create(this);
+    }
+
     @Override
     public String toString() {
         return "Address [apartmentNumber=" + apartmentNumber + ", city=" + city + ", floor=" + floor + ", id=" + id

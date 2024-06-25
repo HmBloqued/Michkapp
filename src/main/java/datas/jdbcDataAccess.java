@@ -325,43 +325,8 @@ public class jdbcDataAccess {
         return furnitures;
     }
 
-    public FurnitureStateInventory getFurnitureStateInventoryByFurniture(Furniture furniture,
-            Inventory inventory) {
-        FurnitureStateInventory furnitureStateInventory = null;
-        String query = "SELECT fsi.datetime as fsi_datetime, fsi.furniture_state as fsi_furniture_state "
-                +
-                "FROM FurnitureStateInventory fsi " +
-                "WHERE fsi.furniture_id = " + furniture.getId() + " AND fsi.inventory_id = " + inventory.getId();
-
-        Statement statement = null;
-        ResultSet result = null;
-
-        try {
-            connection = jdbcCreateConnection();
-            statement = connection.createStatement();
-            result = statement.executeQuery(query);
-
-            if (result.next()) {
-                // TEMP: TODO: DELETE
-                System.out.println("-----------------\n");
-                System.out.println(result.getString("fsi_furniture_state"));
-                System.out.println("-----------------\n");
-
-                furnitureStateInventory = new FurnitureStateInventory(
-                        inventory,
-                        furniture,
-                        result.getDate("fsi_datetime"),
-                        State.valueOf(result.getString("fsi_furniture_state")));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return furnitureStateInventory;
-    }
-
-    public void patchFurnitureStateInventoryImage(FurnitureStateInventory furnitureStateInventory, byte[] image) {
-        String query = "UPDATE FurnitureStateInventory SET picture = ?, picture_date = NOW(), datetime = NOW() WHERE furniture_id = ? AND inventory_id = ?";
+    public void patchFurnitureStateInventoryImage(FurnitureStateInventory furnitureStateInventory, byte[] image, String imageName) {
+        String query = "UPDATE FurnitureStateInventory SET picture = ?, picture_date = NOW(), datetime = NOW(), picture_name = ? WHERE furniture_id = ? AND inventory_id = ?";
 
         PreparedStatement preparedStatement = null;
 
@@ -371,8 +336,9 @@ public class jdbcDataAccess {
 
             // Set the parameters
             preparedStatement.setBytes(1, image);
-            preparedStatement.setInt(2, furnitureStateInventory.getFurniture().getId());
-            preparedStatement.setInt(3, furnitureStateInventory.getInventory().getId());
+            preparedStatement.setString(2, furnitureStateInventory.getPictureName());
+            preparedStatement.setInt(3, furnitureStateInventory.getFurniture().getId());
+            preparedStatement.setInt(4, furnitureStateInventory.getInventory().getId());
 
             // Execute the query
             int affectedRows = preparedStatement.executeUpdate();
@@ -442,7 +408,7 @@ public class jdbcDataAccess {
     public FurnitureStateInventory getFurnitureStateInventoryFromInventoryFurniture(Inventory inventory,
             Furniture furniture) {
         FurnitureStateInventory furnitureStateInventory = null;
-        String query = "SELECT fsi.datetime as fsi_datetime, fsi.furniture_state as fsi_furniture_state, fsi.picture as fsi_picture, fsi.picture_date as fsi_picture_date, fsi.comment as fsi_comment "
+        String query = "SELECT fsi.datetime as fsi_datetime, fsi.furniture_state as fsi_furniture_state, fsi.picture as fsi_picture, fsi.picture_date as fsi_picture_date, fsi.comment as fsi_comment, fsi.picture_name as fsi_picture_name "
                 +
                 "FROM FurnitureStateInventory fsi " +
                 "WHERE fsi.furniture_id = " + furniture.getId() + " AND fsi.inventory_id = " + inventory.getId();
@@ -463,8 +429,8 @@ public class jdbcDataAccess {
                         State.valueOf(result.getString("fsi_furniture_state")),
                         result.getBytes("fsi_picture"),
                         result.getDate("fsi_picture_date"),
-                        result.getString("fsi_comment")
-                        );
+                        result.getString("fsi_comment"),
+                        result.getString("fsi_picture_name"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -473,7 +439,33 @@ public class jdbcDataAccess {
         return furnitureStateInventory;
     }
 
-    public void patchPropertyLastInventoryDate(Property property){
+    public boolean deleteInventory(Inventory inventory) {
+        try {
+            // Delete furnitureStateInventory
+            String query = "DELETE * FROM furnitureStateInventory WHERE inventory_id = ?";
+            PreparedStatement preparedStatement = null;
+
+            connection = jdbcCreateConnection();
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, inventory.getId());
+
+
+            // Delete inventory
+            query = "DELETE * FROM inventory WHERE id = ?";
+            preparedStatement = null;
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, inventory.getId());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Delete inventory
+
+        return true;
+    }
+
+    public void patchPropertyLastInventoryDate(Property property) {
         String query = "UPDATE Property SET last_inventory_date = NOW() WHERE id = ?";
 
         PreparedStatement preparedStatement = null;
@@ -495,6 +487,167 @@ public class jdbcDataAccess {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void addUser(User user){
+        String query = "INSERT INTO User (id, firstname, lastname, role) VALUES (?, ?, ?, ?)";
+
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = jdbcCreateConnection();
+            preparedStatement = connection.prepareStatement(query);
+
+            // Set the parameters
+            preparedStatement.setInt(1, user.getId());
+            preparedStatement.setString(2, user.getFirstname());
+            preparedStatement.setString(3, user.getLastname());
+            preparedStatement.setString(4, user.getRole().toString());
+
+            // Execute the query
+            int affectedRows = preparedStatement.executeUpdate();
+
+            // Check if the insert was successful
+            if (affectedRows <= 0) {
+                System.out.println("Error inserting the user");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addAddress(Address address){
+        String query = "INSERT INTO Address (id, street_name, zip_code, street_number, city, floor, apartment_number) VALUES (?, ?, ?, ?, ?)";
+
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = jdbcCreateConnection();
+            preparedStatement = connection.prepareStatement(query);
+
+            // Set the parameters
+            preparedStatement.setInt(1, address.getId());
+            preparedStatement.setString(2, address.getStreetName());
+            preparedStatement.setString(3, address.getZipCode());
+            preparedStatement.setString(4, address.getStreetNumber());
+            preparedStatement.setString(5, address.getCity());
+
+            // Execute the query
+            int affectedRows = preparedStatement.executeUpdate();
+
+            // Check if the insert was successful
+            if (affectedRows <= 0) {
+                System.out.println("Error inserting the address");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addProperty(Property property){
+        String query = "INSERT INTO Property (id, address_id, owner_id) VALUES (?, ?, ?)";
+
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = jdbcCreateConnection();
+            preparedStatement = connection.prepareStatement(query);
+
+            // Set the parameters
+            preparedStatement.setInt(1, property.getId());
+            preparedStatement.setInt(2, property.getAddress().getId());
+            preparedStatement.setInt(3, property.getOwner().getId());
+
+            // Execute the query
+            int affectedRows = preparedStatement.executeUpdate();
+
+            // Check if the insert was successful
+            if (affectedRows <= 0) {
+                System.out.println("Error inserting the property");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addRoom(Room room){
+        String query = "INSERT INTO Room (property_id, room_type, name) VALUES (?, ?, ?)";
+
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = jdbcCreateConnection();
+            preparedStatement = connection.prepareStatement(query);
+
+            // Set the parameters
+            preparedStatement.setInt(1, room.getProperty().getId());
+            preparedStatement.setString(2, room.getRoomType().toString());
+            preparedStatement.setString(3, room.getName());
+
+            // Execute the query
+            int affectedRows = preparedStatement.executeUpdate();
+
+            // Check if the insert was successful
+            if (affectedRows <= 0) {
+                System.out.println("Error inserting the room");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addFurniture(Furniture furniture){
+        String query = "INSERT INTO Furniture (name, room_id, position) VALUES (?, ?, ?)";
+
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = jdbcCreateConnection();
+            preparedStatement = connection.prepareStatement(query);
+
+            // Set the parameters
+            preparedStatement.setString(1, furniture.getName());
+            preparedStatement.setInt(2, furniture.getRoom().getId());
+            preparedStatement.setString(3, furniture.getPosition());
+
+            // Execute the query
+            int affectedRows = preparedStatement.executeUpdate();
+
+            // Check if the insert was successful
+            if (affectedRows <= 0) {
+                System.out.println("Error inserting the furniture");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public User getUserById(int userId){
+        String query = "SELECT * FROM User WHERE id = ?";
+
+        PreparedStatement preparedStatement = null;
+        ResultSet result = null;
+        User user = null;
+
+        try {
+            connection = jdbcCreateConnection();
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, userId);
+
+            result = preparedStatement.executeQuery();
+
+            if (result.next()) {
+                user = new User(
+                        result.getInt("id"),
+                        result.getString("firstname"),
+                        result.getString("lastname"),
+                        Role.valueOf(result.getString("role")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return user;
     }
 
     public void jdbcDataClose() throws SQLException {

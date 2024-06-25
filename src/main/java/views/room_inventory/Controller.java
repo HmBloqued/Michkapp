@@ -1,10 +1,6 @@
 package views.room_inventory;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import datas.jdbcDataAccess;
@@ -21,7 +17,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import models.Address;
 import models.Furniture;
-import models.FurnitureStateInventory;
 import models.Inventory;
 import models.Property;
 import models.Room;
@@ -62,11 +57,13 @@ public class Controller {
         this.rooms = dataAccess.getRoomsByProperty(property);
         this.inventory = inventory;
         this.property = property;
-        listViewRoom.getItems().addAll(rooms.stream().map(Room::getName).toArray(String[]::new));
-        listViewRoom.getSelectionModel().select(0);
-        this.selectedRoom = rooms.get(0);
-
-        this.displayRoom();
+        if(rooms.size() != 0){
+            listViewRoom.getItems().addAll(rooms.stream().map(Room::getName).toArray(String[]::new));
+            listViewRoom.getSelectionModel().select(0);
+            this.selectedRoom = rooms.get(0);
+    
+            this.displayRoom();
+        }
     }
 
     @FXML
@@ -128,6 +125,17 @@ public class Controller {
 
     @FXML
     public void cancelInventory(ActionEvent event) throws IOException {
-        System.out.println("Terminate inventory");
+        FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("../cancel_inventory/cancel_inventory.fxml"));
+            AnchorPane root = loader.load();
+
+            views.cancel_inventory.Controller controller = loader.getController();
+            controller.setData(property, inventory);
+
+            Scene nextScene = new Scene(root);
+            Stage mainWindow = (Stage) inventoryTable.getScene().getWindow();
+
+            mainWindow.setScene(nextScene);
+            mainWindow.show();
     }
 }

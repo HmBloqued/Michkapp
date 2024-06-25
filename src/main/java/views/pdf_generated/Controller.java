@@ -33,7 +33,6 @@ public class Controller {
             mainWindow.show();
             
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

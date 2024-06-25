@@ -57,12 +57,19 @@ public class User extends Persist{
                 + ", role=" + role + "]";
     }
 
-
     public String getFirstname() {
         return firstname;
     }
 
     public String getLastname() {
         return lastname;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public Role getRole() {
+        return role;
     }
 }

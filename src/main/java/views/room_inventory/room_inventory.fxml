@@ -66,7 +66,7 @@
             id="inventory-pane">
             <VBox id="inventory-table" spacing="10.0">
                 <children>
-                    <HBox spacing="5.0" maxWidth="814.0">
+                    <HBox spacing="10.0" maxWidth="814.0">
                         <children>
                             <HBox prefWidth="150.0">
                                 <children>
@@ -82,21 +82,21 @@
                             </HBox>
                         </children>
                         <children>
-                            <HBox prefWidth="125.0">
+                            <HBox prefWidth="105.0">
                                 <children>
                                     <Label text="ETAT" styleClass="title-label" />
                                 </children>
                             </HBox>
                         </children>
                         <children>
-                            <HBox prefWidth="220.0">
+                            <HBox prefWidth="240.0">
                                 <children>
                                     <Label text="COMMENTAIRE" styleClass="title-label" />
                                 </children>
                             </HBox>
                         </children>
                         <children>
-                            <HBox prefWidth="180.0">
+                            <HBox prefWidth="160.0">
                                 <children>
                                     <Label text="PHOTOGRAPHIE" styleClass="title-label" />
                                 </children>

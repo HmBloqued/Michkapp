@@ -26,6 +26,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Locale;
 import java.util.Date;
 
 public class PdfWriterService {
@@ -42,7 +43,7 @@ public class PdfWriterService {
                     "_" + property.getAddress().getStreetName() +
                     "_" + property.getAddress().getZipCode() +
                     "_" + property.getAddress().getCity() +
-                    "-" + new java.text.SimpleDateFormat("yyyy-MM-dd:hh-mm-ss").format(new java.util.Date()) +
+                    "-" + new java.text.SimpleDateFormat("yyyy-MM-dd:hh-mm-ss", Locale.FRANCE).format(new java.util.Date()) +
                     ".pdf";
             PdfWriter.getInstance(document, new FileOutputStream(filename));
 
@@ -80,7 +81,7 @@ public class PdfWriterService {
             document.add(new Paragraph(
                     "Propriétaire : " + property.getOwner().getFirstname() + " " + property.getOwner().getLastname()));
             document.add(new Paragraph(
-                    "Date : " + new java.text.SimpleDateFormat("yyyy-MM-dd:hh-mm-ss").format(new java.util.Date())));
+                    "Date : " + new java.text.SimpleDateFormat("yyyy-MM-dd:hh-mm-ss", Locale.FRANCE).format(new java.util.Date())));
             document.add(new Paragraph("\n"));
 
             // Show if owner and tenants were present during inventory
@@ -171,7 +172,7 @@ public class PdfWriterService {
                     }
 
                     Date pictureDate = furnitureStateInventory.getDatetime();
-                    cell = new PdfPCell(new Paragraph(new java.text.SimpleDateFormat("yyyy-MM-dd:hh-mm").format(pictureDate), fontMedium));
+                    cell = new PdfPCell(new Paragraph(new java.text.SimpleDateFormat("yyyy-MM-dd:hh-mm", Locale.FRANCE).format(pictureDate), fontMedium));
                     table.addCell(cell);
                 }
                 document.add(table);
@@ -186,10 +187,8 @@ public class PdfWriterService {
             e.printStackTrace();
             return false;
         } catch (MalformedURLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } finally {
             // Fermer le document
