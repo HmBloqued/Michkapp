@@ -42,11 +42,6 @@ public class Controller {
     @FXML
     private CheckBox occupantPresent;
 
-    @FXML
-    public void clickOnSaveButton(ActionEvent event) throws IOException {
-        System.out.println("Save");
-    }
-
     public void setData(Property property) {
         this.property = property;
         Address address = property.getAddress();

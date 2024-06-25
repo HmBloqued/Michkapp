@@ -32,7 +32,6 @@ public class Controller implements Initializable {
         }
 
         for (Property property : properties) {
-            System.out.println(property);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/components/property/property.fxml"));
             try {
                 Parent component = loader.load();

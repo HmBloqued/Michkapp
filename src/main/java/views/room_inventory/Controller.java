@@ -70,7 +70,6 @@ public class Controller {
     private void selectRoom(MouseEvent event) {
         int index = listViewRoom.getSelectionModel().getSelectedIndex();
         this.selectedRoom = rooms.get(index);
-        System.out.println("Selected room: " + this.selectedRoom.getName());
         this.displayRoom();
     }
 

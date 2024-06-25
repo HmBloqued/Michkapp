@@ -90,8 +90,6 @@ public class Controller {
             this.unchoosedPicture.setManaged(false);
             this.choosedPicture.setVisible(true);
             this.unchoosedPicture.setVisible(false);
-        } else {
-            System.out.println("picture not existing !");
         }
 
         // Prepare text input and add listener

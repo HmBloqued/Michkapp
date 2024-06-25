@@ -28,8 +28,6 @@ public class Controller {
     public void setData(Property property, Inventory inventory) {
         this.property = property;
         this.inventory = inventory;
-        // Prepare this view
-        System.out.println("Set data for terminate inventory");
     }
 
     @FXML

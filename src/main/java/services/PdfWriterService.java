@@ -136,9 +136,6 @@ public class PdfWriterService {
                     FurnitureStateInventory furnitureStateInventory = dataAccess
                             .getFurnitureStateInventoryFromInventoryFurniture(inventory, furniture);
 
-                    System.out.println("TODO: TEMP DELETE");
-                    System.out.println(furnitureStateInventory);
-
                     cell = new PdfPCell(new Paragraph(furniture.getName(), fontMedium));
                     table.addCell(cell);
                     cell = new PdfPCell(new Paragraph(furniture.getPosition(), fontMedium));
