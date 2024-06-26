@@ -68,7 +68,7 @@
                 <children>
                     <HBox spacing="10.0" maxWidth="814.0">
                         <children>
-                            <HBox prefWidth="150.0">
+                            <HBox prefWidth="140.0">
                                 <children>
                                     <Label text="ÉLÉMENT" styleClass="title-label" />
                                 </children>
@@ -82,14 +82,14 @@
                             </HBox>
                         </children>
                         <children>
-                            <HBox prefWidth="105.0">
+                            <HBox prefWidth="125.0">
                                 <children>
                                     <Label text="ETAT" styleClass="title-label" />
                                 </children>
                             </HBox>
                         </children>
                         <children>
-                            <HBox prefWidth="240.0">
+                            <HBox prefWidth="220.0">
                                 <children>
                                     <Label text="COMMENTAIRE" styleClass="title-label" />
                                 </children>

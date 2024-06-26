@@ -10,7 +10,7 @@
 <HBox spacing="10.0" styleClass="table-row" xmlns:fx="http://javafx.com/fxml/1" maxWidth="814.0"
     fx:controller="resources.components.inventory_line.Controller" stylesheets="@styles.css">
     <children>
-        <HBox prefWidth="150.0">
+        <HBox prefWidth="140.0">
             <children>
                 <Label text="Frigo" styleClass="table-element" fx:id="furnitureNameLabel" />
             </children>
@@ -24,17 +24,17 @@
         </HBox>
     </children>
     <children>
-        <HBox prefWidth="105.0">
+        <HBox prefWidth="125.0">
             <children>
-                <ComboBox fx:id="stateCombo" prefWidth="105.0">
+                <ComboBox fx:id="stateCombo" prefWidth="125.0">
                 </ComboBox>
             </children>
         </HBox>
     </children>
     <children>
-        <HBox prefWidth="240.0">
+        <HBox prefWidth="220.0">
             <children>
-                <TextField fx:id="commentInput" prefWidth="240.0" />
+                <TextField fx:id="commentInput" prefWidth="220.0" />
             </children>
         </HBox>
     </children>

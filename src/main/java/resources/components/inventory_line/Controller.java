@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Map;
 
 import datas.jdbcDataAccess;
 import javafx.beans.value.ObservableValue;
@@ -37,7 +38,7 @@ public class Controller {
     private Label pictureName;
 
     @FXML
-    private ComboBox<State> stateCombo;
+    private ComboBox<String> stateCombo;
 
     @FXML
     private TextField commentInput;
@@ -62,12 +63,29 @@ public class Controller {
 
     FurnitureStateInventory furnitureState;
 
+    private Map<State, String> stateTranslations;
+    private Map<String, State> reverseStateTranslations;
+
+    private void prepareStateTranslations() {
+        stateTranslations = new java.util.HashMap<State, String>();
+        reverseStateTranslations = new java.util.HashMap<String, State>();
+
+        stateTranslations.put(State.NEW, "Neuf");
+        stateTranslations.put(State.GOOD, "Bon");
+        stateTranslations.put(State.BAD, "Mauvais");
+        stateTranslations.put(State.MISSING, "Manquant");
+
+        // Fill reverse map
+        for (Map.Entry<State, String> entry : stateTranslations.entrySet()) {
+            reverseStateTranslations.put(entry.getValue(), entry.getKey());
+        }
+    }
+
     // TODO: Temp, should add parameter
     public void setData(Inventory inventory, Furniture furniture) {
         jdbcDataAccess dataAccess = new jdbcDataAccess();
         this.furnitureState = dataAccess.getFurnitureStateInventoryFromInventoryFurniture(inventory, furniture);
-
-        System.out.println("furnitureState : " + furnitureState);
+        this.prepareStateTranslations();
 
         // Set up line component
         this.choosedPicture.setManaged(false);
@@ -78,10 +96,10 @@ public class Controller {
         furniturePositionLabel.setText(furniture.getPosition());
         // TODO: Add a label different than value (to prevent language issues)
         for (State state : State.values()) {
-            stateCombo.getItems().add(state);
+            stateCombo.getItems().add(stateTranslations.get(state));
         }
 
-        stateCombo.setValue(furnitureState.getFurnitureState());
+        stateCombo.setValue(stateTranslations.get(furnitureState.getFurnitureState()));
         stateCombo.setOnAction(event -> handleStateChange());
 
         if (furnitureState.getPicture() != null) {
@@ -105,10 +123,11 @@ public class Controller {
     }
 
     private void handleStateChange() {
-        String selected = stateCombo.getSelectionModel().getSelectedItem().toString();
+        String selectedTranslation = stateCombo.getSelectionModel().getSelectedItem();
+        State selectedState = reverseStateTranslations.get(selectedTranslation);
 
         jdbcDataAccess dataAccess = new jdbcDataAccess();
-        dataAccess.patchFurnitureStateInventoryState(this.furnitureState, State.valueOf(selected));
+        dataAccess.patchFurnitureStateInventoryState(this.furnitureState, selectedState);
     }
 
     private void handleCommentChange() {
@@ -127,9 +146,6 @@ public class Controller {
 
         if (selectedFile != null) {
             this.furnitureState.setPicture(Files.readAllBytes(selectedFile.toPath()), selectedFile.getName());
-            System.out.println(this.furnitureState.getPicture());
-            System.out.println(this.furnitureState.getPictureName());
-            System.out.println(this.furnitureState);
             this.pictureName.setText(selectedFile.getName());
             this.choosedPicture.setManaged(true);
             this.unchoosedPicture.setManaged(false);
